@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aiden's Geometry Prep: Congruent Triangles (15-Question Quiz)</title>
+    <title>Aiden's Geometry Prep: Congruent Triangles (3 Complete 15-Question Tests)</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -64,8 +64,8 @@
                 <div>
                     <div class="flex items-center gap-2">
                         <h1 class="text-lg sm:text-xl font-extrabold text-slate-900 tracking-tight">Geometry A: Congruent Triangles</h1>
-                        <span class="hidden sm:inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-indigo-50 text-indigo-700 border border-indigo-200">
-                            Aiden's 15-Question Prep Quiz
+                        <span id="header-test-badge" class="hidden sm:inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-indigo-50 text-indigo-700 border border-indigo-200">
+                            3 Complete 15-Question Tests
                         </span>
                     </div>
                     <p class="text-xs text-slate-500">Practice Quiz 2 Format &bull; Parts (a) Corresponding Parts, (b) Sufficient Info, (c) Theorem &amp; Statement</p>
@@ -76,7 +76,8 @@
             <div class="flex items-center gap-2 sm:gap-3 flex-wrap">
                 <div class="bg-slate-100 rounded-xl px-3 py-1.5 flex items-center gap-3 text-xs sm:text-sm font-semibold border border-slate-200">
                     <div>
-                        <span class="text-slate-500">Answered:</span>
+                        <span id="stat-test-label" class="text-indigo-700 font-bold mr-1">Test 1:</span>
+                        <span class="text-slate-500">Answered</span>
                         <span id="stat-answered" class="text-slate-900 font-bold">0/15</span>
                     </div>
                     <div class="h-4 w-px bg-slate-300"></div>
@@ -146,13 +147,55 @@
 
     <main id="interactive-view" class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 no-print">
         
+        <!-- 3-Test Selector Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 mb-5">
+            <button type="button" onclick="switchTest(1)" id="test-tab-1" class="p-3.5 rounded-2xl border-2 text-left transition flex items-center justify-between">
+                <div>
+                    <div class="flex items-center gap-2">
+                        <span class="px-2 py-0.5 rounded-md text-xs font-extrabold uppercase bg-indigo-600 text-white" id="test-badge-1">Test 1</span>
+                        <span class="font-bold text-slate-900 text-sm">Quiz Sheet &amp; Core Foundations</span>
+                    </div>
+                    <p class="text-xs text-slate-500 mt-1">Includes Aiden's 4 handout questions + 11 core problems</p>
+                </div>
+                <div class="text-right ml-2">
+                    <div id="test-score-1" class="text-xs font-extrabold text-slate-700 bg-slate-100 px-2.5 py-1 rounded-lg">0/15</div>
+                </div>
+            </button>
+
+            <button type="button" onclick="switchTest(2)" id="test-tab-2" class="p-3.5 rounded-2xl border-2 text-left transition flex items-center justify-between">
+                <div>
+                    <div class="flex items-center gap-2">
+                        <span class="px-2 py-0.5 rounded-md text-xs font-extrabold uppercase bg-slate-200 text-slate-700" id="test-badge-2">Test 2</span>
+                        <span class="font-bold text-slate-900 text-sm">Shared Sides &amp; Vertex Order</span>
+                    </div>
+                    <p class="text-xs text-slate-500 mt-1">15 fresh problems on Reflexive sides, bowties &amp; flipped triangles</p>
+                </div>
+                <div class="text-right ml-2">
+                    <div id="test-score-2" class="text-xs font-extrabold text-slate-700 bg-slate-100 px-2.5 py-1 rounded-lg">0/15</div>
+                </div>
+            </button>
+
+            <button type="button" onclick="switchTest(3)" id="test-tab-3" class="p-3.5 rounded-2xl border-2 text-left transition flex items-center justify-between">
+                <div>
+                    <div class="flex items-center gap-2">
+                        <span class="px-2 py-0.5 rounded-md text-xs font-extrabold uppercase bg-slate-200 text-slate-700" id="test-badge-3">Test 3</span>
+                        <span class="font-bold text-slate-900 text-sm">Test-Day Challenge &amp; Traps</span>
+                    </div>
+                    <p class="text-xs text-slate-500 mt-1">15 exam-level problems mixing HL vs. SAS, SSA traps &amp; proofs</p>
+                </div>
+                <div class="text-right ml-2">
+                    <div id="test-score-3" class="text-xs font-extrabold text-slate-700 bg-slate-100 px-2.5 py-1 rounded-lg">0/15</div>
+                </div>
+            </button>
+        </div>
+
         <!-- Filter Tabs & Question Number Ribbon -->
         <div class="bg-white rounded-2xl border border-slate-200 p-4 shadow-sm mb-6">
             <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
                 <div class="flex items-center gap-1.5 flex-wrap">
                     <span class="text-xs font-bold uppercase tracking-wider text-slate-400 mr-1">Filter:</span>
                     <button onclick="setFilter('all')" id="filter-all" class="px-3 py-1 rounded-lg text-xs font-semibold bg-indigo-600 text-white transition">All 15</button>
-                    <button onclick="setFilter('quiz')" id="filter-quiz" class="px-3 py-1 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition">From Your Quiz (#1–4)</button>
+                    <button onclick="setFilter('quiz')" id="filter-quiz" class="px-3 py-1 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition">Handout Style (#1–4)</button>
                     <button onclick="setFilter('shared')" id="filter-shared" class="px-3 py-1 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition">Reflexive / Shared Side</button>
                     <button onclick="setFilter('bowtie')" id="filter-bowtie" class="px-3 py-1 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition">Vertical Angles</button>
                     <button onclick="setFilter('traps')" id="filter-traps" class="px-3 py-1 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition">Traps &amp; Right &Delta;s</button>
@@ -165,7 +208,7 @@
                 </div>
             </div>
 
-            <!-- 40 Question Pills -->
+            <!-- 15 Question Pills -->
             <div id="question-nav-grid" class="flex items-center gap-1.5 overflow-x-auto pb-2 custom-scroll">
                 <!-- Populated dynamically via JS -->
             </div>
@@ -337,10 +380,15 @@
     <section id="worksheet-view" class="hidden max-w-6xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
         <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm mb-6 no-print flex flex-wrap items-center justify-between gap-4">
             <div>
-                <h2 class="text-lg font-bold text-slate-900">Printable 15-Question Quiz &amp; Answer Key</h2>
-                <p class="text-xs sm:text-sm text-slate-600">Matches the exact layout of Aiden's Geometry A Practice Quiz 2 handout.</p>
+                <h2 class="text-lg font-bold text-slate-900">Printable 15-Question Test &amp; Answer Key</h2>
+                <p class="text-xs sm:text-sm text-slate-600">Choose Test 1, Test 2, or Test 3 below to print any version or check the answer key.</p>
             </div>
-            <div class="flex items-center gap-3">
+            <div class="flex flex-wrap items-center gap-2.5">
+                <div class="inline-flex rounded-xl bg-slate-100 p-1 border border-slate-200">
+                    <button type="button" onclick="switchTest(1)" id="print-tab-1" class="px-3 py-1.5 rounded-lg text-xs font-bold transition">Test 1</button>
+                    <button type="button" onclick="switchTest(2)" id="print-tab-2" class="px-3 py-1.5 rounded-lg text-xs font-bold transition">Test 2</button>
+                    <button type="button" onclick="switchTest(3)" id="print-tab-3" class="px-3 py-1.5 rounded-lg text-xs font-bold transition">Test 3</button>
+                </div>
                 <label class="inline-flex items-center gap-2 text-sm font-semibold text-slate-700 cursor-pointer bg-slate-100 px-3 py-2 rounded-xl border border-slate-200">
                     <input type="checkbox" id="toggle-print-answers" onchange="renderWorksheetView()" class="rounded text-indigo-600 focus:ring-indigo-500">
                     <span>Show Full Answer Key</span>
@@ -366,7 +414,7 @@
                         <span>Period_______</span>
                     </div>
                 </div>
-                <h1 class="font-serif font-bold text-xl sm:text-2xl mb-2">Practice Quiz 2 - Congruent Triangles (15 Questions)</h1>
+                <h1 id="worksheet-paper-title" class="font-serif font-bold text-xl sm:text-2xl mb-2">Practice Test 1 - Congruent Triangles (15 Questions)</h1>
                 <div class="font-serif text-sm space-y-0.5 text-slate-800">
                     <p><strong>a) State the corresponding parts that are congruent in each diagram.</strong></p>
                     <p><strong>b) Determine if there is sufficient information to state the two triangles are congruent.</strong></p>
@@ -382,11 +430,12 @@
 
     <div id="reset-modal" class="hidden fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-xs flex items-center justify-center p-4 no-print">
         <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-xl border border-slate-200">
-            <h3 class="text-lg font-bold text-slate-900 mb-2">Reset All 15 Questions?</h3>
-            <p class="text-sm text-slate-600 mb-5">This will clear Aiden's current answers and score so he can take the 15-question quiz fresh from the beginning.</p>
-            <div class="flex justify-end gap-3">
+            <h3 id="reset-modal-title" class="text-lg font-bold text-slate-900 mb-2">Reset Current Test?</h3>
+            <p class="text-sm text-slate-600 mb-5">You can reset just the current 15-question test or reset all 3 practice tests back to zero.</p>
+            <div class="flex flex-wrap justify-end gap-2.5">
                 <button onclick="closeResetModal()" class="px-4 py-2 rounded-xl text-sm font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition">Cancel</button>
-                <button onclick="confirmResetAll()" class="px-4 py-2 rounded-xl text-sm font-bold bg-rose-600 text-white hover:bg-rose-700 transition">Yes, Reset Test</button>
+                <button onclick="confirmResetCurrentTest()" class="px-4 py-2 rounded-xl text-sm font-bold bg-amber-600 text-white hover:bg-amber-700 transition">Reset Current Test Only</button>
+                <button onclick="confirmResetAll()" class="px-4 py-2 rounded-xl text-sm font-bold bg-rose-600 text-white hover:bg-rose-700 transition">Reset All 3 Tests</button>
             </div>
         </div>
     </div>
@@ -674,477 +723,1442 @@
             };
         }
 
-        const QUESTIONS = [
+        const TEST_META = {
+            1: {
+                title: "Practice Test 1 (Form A) - Quiz Sheet & Core Foundations",
+                shortName: "Test 1"
+            },
+            2: {
+                title: "Practice Test 2 (Form B) - Shared Sides, Bowties & Vertex Order",
+                shortName: "Test 2"
+            },
+            3: {
+                title: "Practice Test 3 (Form C) - Test-Day Challenge & Trap-Proofing",
+                shortName: "Test 3"
+            }
+        };
+
+        const ALL_TESTS = {
             // =========================================================================
-            // QUESTIONS 1 - 4: EXACT PROBLEMS FROM AIDEN'S PRACTICE QUIZ 2 HANDOUT
+            // TEST 1 (15 QUESTIONS): AIDEN'S QUIZ HANDOUT + CORE FOUNDATIONS
             // =========================================================================
-            {
-                id: 1,
-                category: "quiz",
-                badge: "From Your Quiz (#1)",
-                caption: "Collinear base X–V–R with two given angle pairs and one pair of base segments.",
-                diagram: buildTemplate("quiz1_collinear", ["X", "V", "W", "Q", "R"], {
-                    ticks: [
-                        { from: "X", to: "V", count: 1 },
-                        { from: "V", to: "R", count: 1 }
+            1: [
+                {
+                    id: 1,
+                    category: "quiz",
+                    badge: "From Your Quiz (#1)",
+                    caption: "Collinear base X–V–R with two given angle pairs and one pair of base segments.",
+                    diagram: buildTemplate("quiz1_collinear", ["X", "V", "W", "Q", "R"], {
+                        ticks: [
+                            { from: "X", to: "V", count: 1 },
+                            { from: "V", to: "R", count: 1 }
+                        ],
+                        arcs: [
+                            { vertex: "X", ray1: "W", ray2: "V", count: 1 },
+                            { vertex: "V", ray1: "Q", ray2: "R", count: 1 },
+                            { vertex: "W", ray1: "X", ray2: "V", count: 2 },
+                            { vertex: "Q", ray1: "V", ray2: "R", count: 2 }
+                        ]
+                    }),
+                    partAOptions: [
+                        { text: "∠X ≅ ∠QVR (Given 1-arc angles)", correct: true },
+                        { text: "∠W ≅ ∠Q (Given 2-arc angles)", correct: true },
+                        { text: "XV ≅ VR (Given 1-tick sides)", correct: true },
+                        { text: "WV ≅ QR (Assumed without marks)", correct: false }
                     ],
-                    arcs: [
-                        { vertex: "X", ray1: "W", ray2: "V", count: 1 },
-                        { vertex: "V", ray1: "Q", ray2: "R", count: 1 },
-                        { vertex: "W", ray1: "X", ray2: "V", count: 2 },
-                        { vertex: "Q", ray1: "V", ray2: "R", count: 2 }
-                    ]
-                }),
-                partAOptions: [
-                    { text: "∠X ≅ ∠QVR (Given 1-arc angles)", correct: true },
-                    { text: "∠W ≅ ∠Q (Given 2-arc angles)", correct: true },
-                    { text: "XV ≅ VR (Given 1-tick sides)", correct: true },
-                    { text: "WV ≅ QR (Assumed without marks)", correct: false }
-                ],
-                sufficient: true,
-                theorem: "AAS",
-                firstTri: "XVW",
-                secondTri: "VQR",
-                vertexChoices: ["V", "Q", "R"],
-                hint: "Look at ΔXVW: you know two angles (∠X and ∠W) and side XV. Since side XV is NOT between ∠X and ∠W, which theorem uses 2 angles and a non-included side?",
-                explanation: "In ΔXVW and ΔVQR, we are given two pairs of congruent angles (∠X ≅ ∠QVR and ∠W ≅ ∠Q) and a non-included side (XV ≅ VR) opposite the 2-arc angle. By AAS, ΔXVW ≅ ΔVQR."
-            },
-            {
-                id: 2,
-                category: "quiz",
-                badge: "From Your Quiz (#2)",
-                caption: "Two triangles sharing center segment NM.",
-                diagram: buildTemplate("quiz2_shared_diag", ["D", "N", "M", "L"], {
-                    ticks: [
-                        { from: "D", to: "N", count: 2 },
-                        { from: "L", to: "M", count: 2 }
+                    sufficient: true,
+                    theorem: "AAS",
+                    firstTri: "XVW",
+                    secondTri: "VQR",
+                    vertexChoices: ["V", "Q", "R"],
+                    hint: "Look at ΔXVW: you know two angles (∠X and ∠W) and side XV. Since side XV is NOT between ∠X and ∠W, which theorem uses 2 angles and a non-included side?",
+                    explanation: "In ΔXVW and ΔVQR, we are given two pairs of congruent angles (∠X ≅ ∠QVR and ∠W ≅ ∠Q) and a non-included side (XV ≅ VR) opposite the 2-arc angle. By AAS, ΔXVW ≅ ΔVQR."
+                },
+                {
+                    id: 2,
+                    category: "quiz",
+                    badge: "From Your Quiz (#2)",
+                    caption: "Two triangles sharing center segment NM.",
+                    diagram: buildTemplate("quiz2_shared_diag", ["D", "N", "M", "L"], {
+                        ticks: [
+                            { from: "D", to: "N", count: 2 },
+                            { from: "L", to: "M", count: 2 }
+                        ],
+                        arcs: [
+                            { vertex: "N", ray1: "D", ray2: "M", count: 1 },
+                            { vertex: "M", ray1: "L", ray2: "N", count: 1 }
+                        ]
+                    }),
+                    partAOptions: [
+                        { text: "DN ≅ LM (Given 2-tick sides)", correct: true },
+                        { text: "∠DNM ≅ ∠LMN (Given 1-arc angles)", correct: true },
+                        { text: "NM ≅ MN (Reflexive Property — shared side)", correct: true },
+                        { text: "DM ≅ LN (Not marked)", correct: false }
                     ],
-                    arcs: [
-                        { vertex: "N", ray1: "D", ray2: "M", count: 1 },
-                        { vertex: "M", ray1: "L", ray2: "N", count: 1 }
-                    ]
-                }),
-                partAOptions: [
-                    { text: "DN ≅ LM (Given 2-tick sides)", correct: true },
-                    { text: "∠DNM ≅ ∠LMN (Given 1-arc angles)", correct: true },
-                    { text: "NM ≅ MN (Reflexive Property — shared side)", correct: true },
-                    { text: "DM ≅ LN (Not marked)", correct: false }
-                ],
-                sufficient: true,
-                theorem: "SAS",
-                firstTri: "DNM",
-                secondTri: "LMN",
-                vertexChoices: ["L", "M", "N"],
-                hint: "Notice that both triangles share side NM! By the Reflexive Property, NM ≅ MN. Where is the marked angle located relative to the two sides?",
-                explanation: "We have DN ≅ LM (given), ∠DNM ≅ ∠LMN (given), and shared side NM ≅ MN (Reflexive Property). Because the angle is included between the two sides, ΔDNM ≅ ΔLMN by SAS."
-            },
-            {
-                id: 3,
-                category: "quiz",
-                badge: "From Your Quiz (#3)",
-                caption: "Intersecting lines QM–X and P–Y forming vertical angles at R.",
-                diagram: buildTemplate("quiz3_bowtie_vert", ["Q", "P", "R", "X", "Y"], {
-                    ticks: [
-                        { from: "Q", to: "R", count: 1 },
-                        { from: "X", to: "R", count: 1 }
+                    sufficient: true,
+                    theorem: "SAS",
+                    firstTri: "DNM",
+                    secondTri: "LMN",
+                    vertexChoices: ["L", "M", "N"],
+                    hint: "Notice that both triangles share side NM! By the Reflexive Property, NM ≅ MN. Where is the marked angle located relative to the two sides?",
+                    explanation: "We have DN ≅ LM (given), ∠DNM ≅ ∠LMN (given), and shared side NM ≅ MN (Reflexive Property). Because the angle is included between the two sides, ΔDNM ≅ ΔLMN by SAS."
+                },
+                {
+                    id: 3,
+                    category: "quiz",
+                    badge: "From Your Quiz (#3)",
+                    caption: "Intersecting lines Q–X and P–Y forming vertical angles at R.",
+                    diagram: buildTemplate("quiz3_bowtie_vert", ["Q", "P", "R", "X", "Y"], {
+                        ticks: [
+                            { from: "Q", to: "R", count: 1 },
+                            { from: "X", to: "R", count: 1 }
+                        ],
+                        arcs: [
+                            { vertex: "Q", ray1: "P", ray2: "R", count: 2 },
+                            { vertex: "X", ray1: "Y", ray2: "R", count: 2 },
+                            { vertex: "R", ray1: "Q", ray2: "P", count: 1 },
+                            { vertex: "R", ray1: "X", ray2: "Y", count: 1 }
+                        ]
+                    }),
+                    partAOptions: [
+                        { text: "∠Q ≅ ∠X (Given 2-arc angles)", correct: true },
+                        { text: "QR ≅ XR (Given 1-tick sides)", correct: true },
+                        { text: "∠QRP ≅ ∠XRY (Vertical Angles)", correct: true },
+                        { text: "QP ≅ XY (Not given)", correct: false }
                     ],
-                    arcs: [
-                        { vertex: "Q", ray1: "P", ray2: "R", count: 2 },
-                        { vertex: "X", ray1: "Y", ray2: "R", count: 2 },
-                        { vertex: "R", ray1: "Q", ray2: "P", count: 1 },
-                        { vertex: "R", ray1: "X", ray2: "Y", count: 1 }
-                    ]
-                }),
-                partAOptions: [
-                    { text: "∠Q ≅ ∠X (Given 2-arc angles)", correct: true },
-                    { text: "QR ≅ XR (Given 1-tick sides)", correct: true },
-                    { text: "∠QRP ≅ ∠XRY (Vertical Angles)", correct: true },
-                    { text: "QP ≅ XY (Not given)", correct: false }
-                ],
-                sufficient: true,
-                theorem: "ASA",
-                firstTri: "QRP",
-                secondTri: "XRY",
-                vertexChoices: ["X", "R", "Y"],
-                hint: "Look at side QR: it sits directly between ∠Q (2 arcs) and ∠QRP (1 arc at the center). Which theorem uses two angles and the included side?",
-                explanation: "We have ∠Q ≅ ∠X, included side QR ≅ XR, and vertical angles ∠QRP ≅ ∠XRY. Therefore, by ASA, ΔQRP ≅ ΔXRY."
-            },
-            {
-                id: 4,
-                category: "quiz",
-                badge: "From Your Quiz (#4)",
-                caption: "Two separate triangles with three pairs of marked sides.",
-                diagram: buildTemplate("quiz4_detached_inv", ["K", "I", "J", "D", "E", "C"], {
-                    ticks: [
-                        { from: "K", to: "J", count: 1 },
-                        { from: "D", to: "C", count: 1 },
-                        { from: "K", to: "I", count: 2 },
-                        { from: "E", to: "C", count: 2 },
-                        { from: "I", to: "J", count: 3 },
-                        { from: "E", to: "D", count: 3 }
-                    ]
-                }),
-                partAOptions: [
-                    { text: "KJ ≅ CD (Given 1-tick sides)", correct: true },
-                    { text: "KI ≅ CE (Given 2-tick sides)", correct: true },
-                    { text: "IJ ≅ ED (Given 3-tick sides)", correct: true },
-                    { text: "∠K ≅ ∠D (Not right or marked)", correct: false }
-                ],
-                sufficient: true,
-                theorem: "SSS",
-                firstTri: "KIJ",
-                secondTri: "CED",
-                vertexChoices: ["C", "E", "D"],
-                hint: "All three pairs of sides are marked with 1, 2, and 3 ticks! Match the vertices carefully: K is between the 1-tick and 2-tick sides. Which vertex on the right is between the 1-tick and 2-tick sides?",
-                explanation: "All three corresponding sides are congruent (KJ ≅ CD, KI ≅ CE, IJ ≅ ED), so the triangles are congruent by SSS. Matching vertices: K (between 1 & 2 ticks) matches C; I (between 2 & 3 ticks) matches E; J (between 1 & 3 ticks) matches D. Thus ΔKIJ ≅ ΔCED."
-            },
+                    sufficient: true,
+                    theorem: "ASA",
+                    firstTri: "QRP",
+                    secondTri: "XRY",
+                    vertexChoices: ["X", "R", "Y"],
+                    hint: "Look at side QR: it sits directly between ∠Q (2 arcs) and ∠QRP (1 arc at the center). Which theorem uses two angles and the included side?",
+                    explanation: "We have ∠Q ≅ ∠X, included side QR ≅ XR, and vertical angles ∠QRP ≅ ∠XRY. Therefore, by ASA, ΔQRP ≅ ΔXRY."
+                },
+                {
+                    id: 4,
+                    category: "quiz",
+                    badge: "From Your Quiz (#4)",
+                    caption: "Two separate triangles with three pairs of marked sides.",
+                    diagram: buildTemplate("quiz4_detached_inv", ["K", "I", "J", "D", "E", "C"], {
+                        ticks: [
+                            { from: "K", to: "J", count: 1 },
+                            { from: "D", to: "C", count: 1 },
+                            { from: "K", to: "I", count: 2 },
+                            { from: "E", to: "C", count: 2 },
+                            { from: "I", to: "J", count: 3 },
+                            { from: "E", to: "D", count: 3 }
+                        ]
+                    }),
+                    partAOptions: [
+                        { text: "KJ ≅ CD (Given 1-tick sides)", correct: true },
+                        { text: "KI ≅ CE (Given 2-tick sides)", correct: true },
+                        { text: "IJ ≅ ED (Given 3-tick sides)", correct: true },
+                        { text: "∠K ≅ ∠D (Not right or marked)", correct: false }
+                    ],
+                    sufficient: true,
+                    theorem: "SSS",
+                    firstTri: "KIJ",
+                    secondTri: "CED",
+                    vertexChoices: ["C", "E", "D"],
+                    hint: "All three pairs of sides are marked with 1, 2, and 3 ticks! Match the vertices carefully: K is between the 1-tick and 2-tick sides. Which vertex on the right is between the 1-tick and 2-tick sides?",
+                    explanation: "All three corresponding sides are congruent (KJ ≅ CD, KI ≅ CE, IJ ≅ ED), so the triangles are congruent by SSS. Matching vertices: K (between 1 & 2 ticks) matches C; I (between 2 & 3 ticks) matches E; J (between 1 & 3 ticks) matches D. Thus ΔKIJ ≅ ΔCED."
+                },
+                {
+                    id: 5,
+                    category: "detached",
+                    badge: "Detached Triangles",
+                    caption: "Two triangles with two pairs of congruent sides and an included angle.",
+                    diagram: buildTemplate("detached_standard", ["A", "B", "C", "D", "E", "F"], {
+                        ticks: [
+                            { from: "A", to: "B", count: 1 },
+                            { from: "D", to: "E", count: 1 },
+                            { from: "B", to: "C", count: 2 },
+                            { from: "E", to: "F", count: 2 }
+                        ],
+                        arcs: [
+                            { vertex: "B", ray1: "A", ray2: "C", count: 1 },
+                            { vertex: "E", ray1: "D", ray2: "F", count: 1 }
+                        ]
+                    }),
+                    partAOptions: [
+                        { text: "AB ≅ DE (Given 1-tick sides)", correct: true },
+                        { text: "∠B ≅ ∠E (Given 1-arc angles)", correct: true },
+                        { text: "BC ≅ EF (Given 2-tick sides)", correct: true },
+                        { text: "AC ≅ DF (Not given)", correct: false }
+                    ],
+                    sufficient: true,
+                    theorem: "SAS",
+                    firstTri: "ABC",
+                    secondTri: "DEF",
+                    vertexChoices: ["D", "E", "F"],
+                    hint: "Angle B is directly between side AB (1 tick) and side BC (2 ticks).",
+                    explanation: "Two sides and the included angle of ΔABC are congruent to two sides and the included angle of ΔDEF (AB ≅ DE, ∠B ≅ ∠E, BC ≅ EF). By SAS, ΔABC ≅ ΔDEF."
+                },
+                {
+                    id: 6,
+                    category: "detached",
+                    badge: "Detached Triangles",
+                    caption: "Two triangles with two angles and the side between them marked.",
+                    diagram: buildTemplate("detached_standard", ["G", "H", "J", "M", "N", "P"], {
+                        ticks: [
+                            { from: "H", to: "J", count: 1 },
+                            { from: "N", to: "P", count: 1 }
+                        ],
+                        arcs: [
+                            { vertex: "H", ray1: "G", ray2: "J", count: 1 },
+                            { vertex: "N", ray1: "M", ray2: "P", count: 1 },
+                            { vertex: "J", ray1: "G", ray2: "H", count: 2 },
+                            { vertex: "P", ray1: "M", ray2: "N", count: 2 }
+                        ]
+                    }),
+                    partAOptions: [
+                        { text: "∠H ≅ ∠N (Given 1-arc angles)", correct: true },
+                        { text: "HJ ≅ NP (Given 1-tick sides)", correct: true },
+                        { text: "∠J ≅ ∠P (Given 2-arc angles)", correct: true },
+                        { text: "GH ≅ MN (Not given)", correct: false }
+                    ],
+                    sufficient: true,
+                    theorem: "ASA",
+                    firstTri: "GHJ",
+                    secondTri: "MNP",
+                    vertexChoices: ["M", "N", "P"],
+                    hint: "Look at the marked side HJ: both ∠H and ∠J touch side HJ!",
+                    explanation: "We have two angles and the included side congruent: ∠H ≅ ∠N, HJ ≅ NP, and ∠J ≅ ∠P. By ASA, ΔGHJ ≅ ΔMNP."
+                },
+                {
+                    id: 7,
+                    category: "traps",
+                    badge: "Trap Check!",
+                    caption: "Carefully check the position of the angle relative to the two marked sides.",
+                    diagram: buildTemplate("detached_standard", ["R", "S", "T", "U", "V", "W"], {
+                        ticks: [
+                            { from: "R", to: "S", count: 1 },
+                            { from: "U", to: "V", count: 1 },
+                            { from: "R", to: "T", count: 2 },
+                            { from: "U", to: "W", count: 2 }
+                        ],
+                        arcs: [
+                            { vertex: "S", ray1: "R", ray2: "T", count: 1 },
+                            { vertex: "V", ray1: "U", ray2: "W", count: 1 }
+                        ]
+                    }),
+                    partAOptions: [
+                        { text: "RS ≅ UV (Given 1-tick sides)", correct: true },
+                        { text: "RT ≅ UW (Given 2-tick sides)", correct: true },
+                        { text: "∠S ≅ ∠V (Given 1-arc angles)", correct: true },
+                        { text: "∠R ≅ ∠U (Included angle not given)", correct: false }
+                    ],
+                    sufficient: false,
+                    theorem: "None",
+                    firstTri: "RST",
+                    secondTri: "",
+                    vertexChoices: ["U", "V", "W"],
+                    hint: "In ΔRST, the marked sides are RS and RT (which meet at R), but the marked angle is at S! Is SSA a valid congruence theorem?",
+                    explanation: "The given parts form Side-Side-Angle (SSA), where the angle (∠S) is NOT included between the two marked sides (RS and RT). SSA is NOT sufficient to prove triangles congruent!"
+                },
+                {
+                    id: 8,
+                    category: "traps",
+                    badge: "Right Triangles",
+                    caption: "Two right triangles with hypotenuse and one leg marked congruent.",
+                    diagram: buildTemplate("detached_right", ["A", "B", "C", "D", "E", "F"], {
+                        rightAngles: [
+                            { vertex: "B", ray1: "A", ray2: "C" },
+                            { vertex: "E", ray1: "D", ray2: "F" }
+                        ],
+                        ticks: [
+                            { from: "A", to: "B", count: 1 },
+                            { from: "D", to: "E", count: 1 },
+                            { from: "A", to: "C", count: 2 },
+                            { from: "D", to: "F", count: 2 }
+                        ]
+                    }),
+                    partAOptions: [
+                        { text: "∠B and ∠E are right angles (90°)", correct: true },
+                        { text: "AB ≅ DE (Given 1-tick legs)", correct: true },
+                        { text: "AC ≅ DF (Given 2-tick hypotenuses)", correct: true },
+                        { text: "BC ≅ EF (Not directly marked)", correct: false }
+                    ],
+                    sufficient: true,
+                    theorem: "HL",
+                    firstTri: "ABC",
+                    secondTri: "DEF",
+                    vertexChoices: ["D", "E", "F"],
+                    hint: "Normally SSA doesn't work, EXCEPT in a right triangle when you have the Hypotenuse (2 ticks) and a Leg (1 tick)!",
+                    explanation: "Both ΔABC and ΔDEF are right triangles, and they have congruent hypotenuses (AC ≅ DF) and one pair of congruent legs (AB ≅ DE). By the Hypotenuse-Leg (HL) theorem, ΔABC ≅ ΔDEF."
+                },
+                {
+                    id: 9,
+                    category: "traps",
+                    badge: "Right Triangles",
+                    caption: "Two right triangles with two pairs of legs marked congruent.",
+                    diagram: buildTemplate("detached_right", ["J", "K", "L", "M", "N", "P"], {
+                        rightAngles: [
+                            { vertex: "K", ray1: "J", ray2: "L" },
+                            { vertex: "N", ray1: "M", ray2: "P" }
+                        ],
+                        ticks: [
+                            { from: "J", to: "K", count: 1 },
+                            { from: "M", to: "N", count: 1 },
+                            { from: "K", to: "L", count: 2 },
+                            { from: "N", to: "P", count: 2 }
+                        ]
+                    }),
+                    partAOptions: [
+                        { text: "JK ≅ MN (Given 1-tick legs)", correct: true },
+                        { text: "∠K ≅ ∠N (Right angles are congruent)", correct: true },
+                        { text: "KL ≅ NP (Given 2-tick legs)", correct: true },
+                        { text: "JL ≅ MP (Hypotenuses are not marked)", correct: false }
+                    ],
+                    sufficient: true,
+                    theorem: "SAS",
+                    firstTri: "JKL",
+                    secondTri: "MNP",
+                    vertexChoices: ["M", "N", "P"],
+                    hint: "Be careful! Even though these are right triangles, is the hypotenuse marked? Or do we have the two legs and the 90° angle between them?",
+                    explanation: "Although these are right triangles, the hypotenuses (JL and MP) are NOT marked. Instead, we are given both legs and the included 90° right angle between them (JK ≅ MN, ∠K ≅ ∠N, KL ≅ NP). That is SAS, so ΔJKL ≅ ΔMNP!"
+                },
+                {
+                    id: 10,
+                    category: "shared",
+                    badge: "Reflexive Shared Side",
+                    caption: "Triangle split by vertical segment AB down the middle.",
+                    diagram: buildTemplate("shared_vertical_bisector", ["A", "B", "C", "D"], {
+                        ticks: [
+                            { from: "A", to: "C", count: 1 },
+                            { from: "A", to: "D", count: 1 },
+                            { from: "B", to: "C", count: 2 },
+                            { from: "B", to: "D", count: 2 }
+                        ]
+                    }),
+                    partAOptions: [
+                        { text: "AC ≅ AD (Given 1-tick sides)", correct: true },
+                        { text: "BC ≅ BD (Given 2-tick sides)", correct: true },
+                        { text: "AB ≅ AB (Reflexive Property — shared side)", correct: true },
+                        { text: "∠C ≅ ∠D (Not marked as given)", correct: false }
+                    ],
+                    sufficient: true,
+                    theorem: "SSS",
+                    firstTri: "ABC",
+                    secondTri: "ABD",
+                    vertexChoices: ["A", "B", "D"],
+                    hint: "You have 2 pairs of marked sides, plus both triangles share the center vertical segment AB!",
+                    explanation: "We have AC ≅ AD (given), BC ≅ BD (given), and AB ≅ AB by the Reflexive Property. With all three pairs of sides congruent, ΔABC ≅ ΔABD by SSS."
+                },
+                {
+                    id: 11,
+                    category: "shared",
+                    badge: "Reflexive Shared Side",
+                    caption: "Kite WXYZ sharing horizontal diagonal WY.",
+                    diagram: buildTemplate("shared_kite_horiz", ["W", "Y", "X", "Z"], {
+                        arcs: [
+                            { vertex: "W", ray1: "X", ray2: "Y", count: 1 },
+                            { vertex: "W", ray1: "Z", ray2: "Y", count: 1 },
+                            { vertex: "Y", ray1: "X", ray2: "W", count: 2 },
+                            { vertex: "Y", ray1: "Z", ray2: "W", count: 2 }
+                        ]
+                    }),
+                    partAOptions: [
+                        { text: "∠XWY ≅ ∠ZWY (Given 1-arc angles)", correct: true },
+                        { text: "∠XYW ≅ ∠ZYW (Given 2-arc angles)", correct: true },
+                        { text: "WY ≅ WY (Reflexive Property — shared side)", correct: true },
+                        { text: "WX ≅ WZ (Not marked)", correct: false }
+                    ],
+                    sufficient: true,
+                    theorem: "ASA",
+                    firstTri: "WXY",
+                    secondTri: "WZY",
+                    vertexChoices: ["W", "Z", "Y"],
+                    hint: "Shared side WY connects vertex W (where the 1-arc angles are) and vertex Y (where the 2-arc angles are).",
+                    explanation: "We have ∠XWY ≅ ∠ZWY, included shared side WY ≅ WY (Reflexive Property), and ∠XYW ≅ ∠ZYW. By ASA, ΔWXY ≅ ΔWZY."
+                },
+                {
+                    id: 12,
+                    category: "shared",
+                    badge: "Reflexive Trap!",
+                    caption: "Check carefully whether the given angle is included between the marked side and the shared side!",
+                    diagram: buildTemplate("shared_parallelogram", ["J", "K", "L", "M"], {
+                        ticks: [
+                            { from: "J", to: "K", count: 1 },
+                            { from: "L", to: "M", count: 1 }
+                        ],
+                        arcs: [
+                            { vertex: "L", ray1: "K", ray2: "J", count: 1 },
+                            { vertex: "J", ray1: "M", ray2: "L", count: 1 }
+                        ]
+                    }),
+                    partAOptions: [
+                        { text: "JK ≅ LM (Given 1-tick sides)", correct: true },
+                        { text: "∠KLJ ≅ ∠MJL (Given 1-arc angles)", correct: true },
+                        { text: "JL ≅ LJ (Reflexive Property — shared side)", correct: true },
+                        { text: "∠KJL ≅ ∠MLJ (Not marked)", correct: false }
+                    ],
+                    sufficient: false,
+                    theorem: "None",
+                    firstTri: "JKL",
+                    secondTri: "",
+                    vertexChoices: ["L", "M", "J"],
+                    hint: "Look at ΔJKL: the two known sides are JK and JL (which meet at J), but the marked 1-arc angle is down at L (∠KLJ)! What pattern is Side-Side-Angle?",
+                    explanation: "In ΔJKL, the known sides are JK and JL, which form angle ∠KJL. However, the given angle is ∠KLJ, which is NOT included between those two sides! That creates an SSA trap, so there is NOT enough information."
+                },
+                {
+                    id: 13,
+                    category: "bowtie",
+                    badge: "Vertical Angles",
+                    caption: "Intersecting segments AD and BC bisecting each other at E.",
+                    diagram: buildTemplate("bowtie_horiz", ["E", "A", "B", "D", "C"], {
+                        ticks: [
+                            { from: "A", to: "E", count: 1 },
+                            { from: "D", to: "E", count: 1 },
+                            { from: "B", to: "E", count: 2 },
+                            { from: "C", to: "E", count: 2 }
+                        ]
+                    }),
+                    partAOptions: [
+                        { text: "AE ≅ DE (Given 1-tick sides)", correct: true },
+                        { text: "BE ≅ CE (Given 2-tick sides)", correct: true },
+                        { text: "∠AEB ≅ ∠DEC (Vertical Angles)", correct: true },
+                        { text: "AB ≅ DC (Not given)", correct: false }
+                    ],
+                    sufficient: true,
+                    theorem: "SAS",
+                    firstTri: "AEB",
+                    secondTri: "DEC",
+                    vertexChoices: ["D", "E", "C"],
+                    hint: "Whenever two straight lines cross at E, the opposite angles ∠AEB and ∠DEC are Vertical Angles — right between the 1-tick and 2-tick sides!",
+                    explanation: "We have AE ≅ DE (1 tick), vertical angles ∠AEB ≅ ∠DEC, and BE ≅ CE (2 ticks). Since the vertical angles are included between the two pairs of sides, ΔAEB ≅ ΔDEC by SAS."
+                },
+                {
+                    id: 14,
+                    category: "bowtie",
+                    badge: "Vertical Angles",
+                    caption: "Horizontal bowtie with outer sides FG ≅ JK and ∠F ≅ ∠J.",
+                    diagram: buildTemplate("bowtie_horiz", ["H", "F", "G", "J", "K"], {
+                        ticks: [
+                            { from: "F", to: "G", count: 1 },
+                            { from: "J", to: "K", count: 1 }
+                        ],
+                        arcs: [
+                            { vertex: "F", ray1: "G", ray2: "H", count: 1 },
+                            { vertex: "J", ray1: "K", ray2: "H", count: 1 }
+                        ]
+                    }),
+                    partAOptions: [
+                        { text: "FG ≅ JK (Given 1-tick sides)", correct: true },
+                        { text: "∠F ≅ ∠J (Given 1-arc angles)", correct: true },
+                        { text: "∠FHG ≅ ∠JHK (Vertical Angles)", correct: true },
+                        { text: "FH ≅ JH (Not marked)", correct: false }
+                    ],
+                    sufficient: true,
+                    theorem: "AAS",
+                    firstTri: "FGH",
+                    secondTri: "JKH",
+                    vertexChoices: ["J", "K", "H"],
+                    hint: "Don't forget the Vertical Angles at H! That gives you two angles (∠F and ∠FHG) and a non-included side (FG).",
+                    explanation: "We have ∠F ≅ ∠J (given), ∠FHG ≅ ∠JHK (Vertical Angles), and non-included side FG ≅ JK (given). By AAS, ΔFGH ≅ ΔJKH."
+                },
+                {
+                    id: 15,
+                    category: "bowtie",
+                    badge: "Vertical Angles Trap!",
+                    caption: "Bowtie with two pairs of angles marked, but no tick marks on any sides.",
+                    diagram: buildTemplate("bowtie_horiz", ["X", "T", "U", "V", "W"], {
+                        arcs: [
+                            { vertex: "T", ray1: "U", ray2: "X", count: 1 },
+                            { vertex: "V", ray1: "W", ray2: "X", count: 1 },
+                            { vertex: "U", ray1: "T", ray2: "X", count: 2 },
+                            { vertex: "W", ray1: "V", ray2: "X", count: 2 }
+                        ]
+                    }),
+                    partAOptions: [
+                        { text: "∠T ≅ ∠V (Given 1-arc angles)", correct: true },
+                        { text: "∠U ≅ ∠W (Given 2-arc angles)", correct: true },
+                        { text: "∠TXU ≅ ∠VXW (Vertical Angles)", correct: true },
+                        { text: "TX ≅ VX (No sides marked)", correct: false }
+                    ],
+                    sufficient: false,
+                    theorem: "None",
+                    firstTri: "TUX",
+                    secondTri: "",
+                    vertexChoices: ["V", "W", "X"],
+                    hint: "We have all three pairs of angles congruent (including the vertical angles at X), but are ANY sides marked congruent?",
+                    explanation: "Even with vertical angles ∠TXU ≅ ∠VXW, we only have three pairs of congruent angles (AAA) and zero congruent sides. AAA cannot prove triangles congruent!"
+                }
+            ],
 
             // =========================================================================
-            // QUESTIONS 5 - 12: DETACHED TRIANGLES (SSS, SAS, ASA, AAS, HL, TRAPS)
+            // TEST 2 (15 QUESTIONS): SHARED SIDES, BOWTIES & VERTEX ORDER MASTERY
             // =========================================================================
-            {
-                id: 5,
-                category: "detached",
-                badge: "Detached Triangles",
-                caption: "Two triangles with two pairs of congruent sides and an included angle.",
-                diagram: buildTemplate("detached_standard", ["A", "B", "C", "D", "E", "F"], {
-                    ticks: [
-                        { from: "A", to: "B", count: 1 },
-                        { from: "D", to: "E", count: 1 },
-                        { from: "B", to: "C", count: 2 },
-                        { from: "E", to: "F", count: 2 }
+            2: [
+                {
+                    id: 1,
+                    category: "quiz",
+                    badge: "Handout Style (#1)",
+                    caption: "Collinear base A–B–E with right angles at ∠ABC and ∠E.",
+                    diagram: buildTemplate("quiz1_collinear", ["A", "B", "C", "D", "E"], {
+                        rightAngles: [
+                            { vertex: "B", ray1: "A", ray2: "C" },
+                            { vertex: "E", ray1: "B", ray2: "D" }
+                        ],
+                        ticks: [
+                            { from: "A", to: "B", count: 1 },
+                            { from: "B", to: "E", count: 1 },
+                            { from: "B", to: "C", count: 2 },
+                            { from: "E", to: "D", count: 2 }
+                        ]
+                    }),
+                    partAOptions: [
+                        { text: "AB ≅ BE (Given 1-tick legs)", correct: true },
+                        { text: "∠ABC ≅ ∠E (Right angles are congruent)", correct: true },
+                        { text: "BC ≅ ED (Given 2-tick legs)", correct: true },
+                        { text: "AC ≅ BD (Hypotenuses not marked)", correct: false }
                     ],
-                    arcs: [
-                        { vertex: "B", ray1: "A", ray2: "C", count: 1 },
-                        { vertex: "E", ray1: "D", ray2: "F", count: 1 }
-                    ]
-                }),
-                partAOptions: [
-                    { text: "AB ≅ DE (Given 1-tick sides)", correct: true },
-                    { text: "∠B ≅ ∠E (Given 1-arc angles)", correct: true },
-                    { text: "BC ≅ EF (Given 2-tick sides)", correct: true },
-                    { text: "AC ≅ DF (Not given)", correct: false }
-                ],
-                sufficient: true,
-                theorem: "SAS",
-                firstTri: "ABC",
-                secondTri: "DEF",
-                vertexChoices: ["D", "E", "F"],
-                hint: "Angle B is directly between side AB (1 tick) and side BC (2 ticks).",
-                explanation: "Two sides and the included angle of ΔABC are congruent to two sides and the included angle of ΔDEF (AB ≅ DE, ∠B ≅ ∠E, BC ≅ EF). By SAS, ΔABC ≅ ΔDEF."
-            },
-            {
-                id: 6,
-                category: "detached",
-                badge: "Detached Triangles",
-                caption: "Two triangles with two angles and the side between them marked.",
-                diagram: buildTemplate("detached_standard", ["G", "H", "J", "M", "N", "P"], {
-                    ticks: [
-                        { from: "H", to: "J", count: 1 },
-                        { from: "N", to: "P", count: 1 }
+                    sufficient: true,
+                    theorem: "SAS",
+                    firstTri: "ABC",
+                    secondTri: "BED",
+                    vertexChoices: ["B", "E", "D"],
+                    hint: "The 90° right angles are directly between the 1-tick and 2-tick legs!",
+                    explanation: "We have AB ≅ BE (1 tick), included right angles ∠ABC ≅ ∠E, and BC ≅ ED (2 ticks). By SAS, ΔABC ≅ ΔBED."
+                },
+                {
+                    id: 2,
+                    category: "quiz",
+                    badge: "Handout Style (#2)",
+                    caption: "Two triangles sharing center segment QR with both pairs of outer sides marked.",
+                    diagram: buildTemplate("quiz2_shared_diag", ["P", "Q", "R", "S"], {
+                        ticks: [
+                            { from: "P", to: "Q", count: 1 },
+                            { from: "S", to: "R", count: 1 },
+                            { from: "P", to: "R", count: 2 },
+                            { from: "S", to: "Q", count: 2 }
+                        ]
+                    }),
+                    partAOptions: [
+                        { text: "PQ ≅ SR (Given 1-tick sides)", correct: true },
+                        { text: "PR ≅ SQ (Given 2-tick sides)", correct: true },
+                        { text: "QR ≅ RQ (Reflexive Property — shared side)", correct: true },
+                        { text: "∠P ≅ ∠S (Not marked as given)", correct: false }
                     ],
-                    arcs: [
-                        { vertex: "H", ray1: "G", ray2: "J", count: 1 },
-                        { vertex: "N", ray1: "M", ray2: "P", count: 1 },
-                        { vertex: "J", ray1: "G", ray2: "H", count: 2 },
-                        { vertex: "P", ray1: "M", ray2: "N", count: 2 }
-                    ]
-                }),
-                partAOptions: [
-                    { text: "∠H ≅ ∠N (Given 1-arc angles)", correct: true },
-                    { text: "HJ ≅ NP (Given 1-tick sides)", correct: true },
-                    { text: "∠J ≅ ∠P (Given 2-arc angles)", correct: true },
-                    { text: "GH ≅ MN (Not given)", correct: false }
-                ],
-                sufficient: true,
-                theorem: "ASA",
-                firstTri: "GHJ",
-                secondTri: "MNP",
-                vertexChoices: ["M", "N", "P"],
-                hint: "Look at the marked side HJ: both ∠H and ∠J touch side HJ!",
-                explanation: "We have two angles and the included side congruent: ∠H ≅ ∠N, HJ ≅ NP, and ∠J ≅ ∠P. By ASA, ΔGHJ ≅ ΔMNP."
-            },
-            {
-                id: 7,
-                category: "traps",
-                badge: "Trap Check!",
-                caption: "Carefully check the position of the angle relative to the two marked sides.",
-                diagram: buildTemplate("detached_standard", ["R", "S", "T", "U", "V", "W"], {
-                    ticks: [
-                        { from: "R", to: "S", count: 1 },
-                        { from: "U", to: "V", count: 1 },
-                        { from: "R", to: "T", count: 2 },
-                        { from: "U", to: "W", count: 2 }
+                    sufficient: true,
+                    theorem: "SSS",
+                    firstTri: "PQR",
+                    secondTri: "SRQ",
+                    vertexChoices: ["S", "R", "Q"],
+                    hint: "Count the side pairs: 1-tick pair, 2-tick pair, plus shared segment QR! Be careful with the vertex order of ΔSRQ.",
+                    explanation: "We have PQ ≅ SR (1 tick), PR ≅ SQ (2 ticks), and shared side QR ≅ RQ (Reflexive Property). By SSS, ΔPQR ≅ ΔSRQ."
+                },
+                {
+                    id: 3,
+                    category: "quiz",
+                    badge: "Handout Style (#3)",
+                    caption: "Intersecting segments AD and BE meeting at center C.",
+                    diagram: buildTemplate("quiz3_bowtie_vert", ["A", "B", "C", "D", "E"], {
+                        ticks: [
+                            { from: "A", to: "C", count: 1 },
+                            { from: "D", to: "C", count: 1 },
+                            { from: "B", to: "C", count: 2 },
+                            { from: "E", to: "C", count: 2 }
+                        ]
+                    }),
+                    partAOptions: [
+                        { text: "AC ≅ DC (Given 1-tick sides)", correct: true },
+                        { text: "BC ≅ EC (Given 2-tick sides)", correct: true },
+                        { text: "∠ACB ≅ ∠DCE (Vertical Angles)", correct: true },
+                        { text: "AB ≅ DE (Not marked)", correct: false }
                     ],
-                    arcs: [
-                        { vertex: "S", ray1: "R", ray2: "T", count: 1 },
-                        { vertex: "V", ray1: "U", ray2: "W", count: 1 }
-                    ]
-                }),
-                partAOptions: [
-                    { text: "RS ≅ UV (Given 1-tick sides)", correct: true },
-                    { text: "RT ≅ UW (Given 2-tick sides)", correct: true },
-                    { text: "∠S ≅ ∠V (Given 1-arc angles)", correct: true },
-                    { text: "∠R ≅ ∠U (Included angle not given)", correct: false }
-                ],
-                sufficient: false,
-                theorem: "None",
-                firstTri: "RST",
-                secondTri: "",
-                vertexChoices: ["U", "V", "W"],
-                hint: "In ΔRST, the marked sides are RS and RT (which meet at R), but the marked angle is at S! Is SSA a valid congruence theorem?",
-                explanation: "The given parts form Side-Side-Angle (SSA), where the angle (∠S) is NOT included between the two marked sides (RS and RT). SSA is NOT sufficient to prove triangles congruent!"
-            },
-            {
-                id: 8,
-                category: "traps",
-                badge: "Right Triangles",
-                caption: "Two right triangles with hypotenuse and one leg marked congruent.",
-                diagram: buildTemplate("detached_right", ["A", "B", "C", "D", "E", "F"], {
-                    rightAngles: [
-                        { vertex: "B", ray1: "A", ray2: "C" },
-                        { vertex: "E", ray1: "D", ray2: "F" }
+                    sufficient: true,
+                    theorem: "SAS",
+                    firstTri: "ACB",
+                    secondTri: "DCE",
+                    vertexChoices: ["D", "C", "E"],
+                    hint: "What angle pair is formed automatically at center vertex C where lines AD and BE cross?",
+                    explanation: "We have AC ≅ DC (1 tick), included vertical angles ∠ACB ≅ ∠DCE, and BC ≅ EC (2 ticks). By SAS, ΔACB ≅ ΔDCE."
+                },
+                {
+                    id: 4,
+                    category: "quiz",
+                    badge: "Handout Style (#4)",
+                    caption: "Two inverted triangles with two angle pairs and the side between them marked.",
+                    diagram: buildTemplate("quiz4_detached_inv", ["M", "N", "P", "R", "S", "T"], {
+                        ticks: [
+                            { from: "M", to: "N", count: 1 },
+                            { from: "T", to: "S", count: 1 }
+                        ],
+                        arcs: [
+                            { vertex: "M", ray1: "N", ray2: "P", count: 1 },
+                            { vertex: "T", ray1: "S", ray2: "R", count: 1 },
+                            { vertex: "N", ray1: "M", ray2: "P", count: 2 },
+                            { vertex: "S", ray1: "T", ray2: "R", count: 2 }
+                        ]
+                    }),
+                    partAOptions: [
+                        { text: "∠M ≅ ∠T (Given 1-arc angles)", correct: true },
+                        { text: "MN ≅ TS (Given 1-tick included sides)", correct: true },
+                        { text: "∠N ≅ ∠S (Given 2-arc angles)", correct: true },
+                        { text: "MP ≅ TR (Not marked)", correct: false }
                     ],
-                    ticks: [
-                        { from: "A", to: "B", count: 1 },
-                        { from: "D", to: "E", count: 1 },
-                        { from: "A", to: "C", count: 2 },
-                        { from: "D", to: "F", count: 2 }
-                    ]
-                }),
-                partAOptions: [
-                    { text: "∠B and ∠E are right angles (90°)", correct: true },
-                    { text: "AB ≅ DE (Given 1-tick legs)", correct: true },
-                    { text: "AC ≅ DF (Given 2-tick hypotenuses)", correct: true },
-                    { text: "BC ≅ EF (Not directly marked)", correct: false }
-                ],
-                sufficient: true,
-                theorem: "HL",
-                firstTri: "ABC",
-                secondTri: "DEF",
-                vertexChoices: ["D", "E", "F"],
-                hint: "Normally SSA doesn't work, EXCEPT in a right triangle when you have the Hypotenuse (2 ticks) and a Leg (1 tick)!",
-                explanation: "Both ΔABC and ΔDEF are right triangles, and they have congruent hypotenuses (AC ≅ DF) and one pair of congruent legs (AB ≅ DE). By the Hypotenuse-Leg (HL) theorem, ΔABC ≅ ΔDEF."
-            },
-            {
-                id: 9,
-                category: "traps",
-                badge: "Right Triangles",
-                caption: "Two right triangles with two pairs of legs marked congruent.",
-                diagram: buildTemplate("detached_right", ["J", "K", "L", "M", "N", "P"], {
-                    rightAngles: [
-                        { vertex: "K", ray1: "J", ray2: "L" },
-                        { vertex: "N", ray1: "M", ray2: "P" }
+                    sufficient: true,
+                    theorem: "ASA",
+                    firstTri: "MNP",
+                    secondTri: "TSR",
+                    vertexChoices: ["T", "S", "R"],
+                    hint: "Match the angle arcs carefully: M (1 arc) matches T (1 arc), and N (2 arcs) matches S (2 arcs).",
+                    explanation: "We have ∠M ≅ ∠T, included side MN ≅ TS, and ∠N ≅ ∠S. By ASA, ΔMNP ≅ ΔTSR."
+                },
+                {
+                    id: 5,
+                    category: "detached",
+                    badge: "Detached Triangles",
+                    caption: "Two detached triangles with two angle pairs and a non-included side.",
+                    diagram: buildTemplate("detached_standard", ["K", "L", "M", "X", "Y", "Z"], {
+                        ticks: [
+                            { from: "L", to: "M", count: 1 },
+                            { from: "Y", to: "Z", count: 1 }
+                        ],
+                        arcs: [
+                            { vertex: "K", ray1: "L", ray2: "M", count: 1 },
+                            { vertex: "X", ray1: "Y", ray2: "Z", count: 1 },
+                            { vertex: "L", ray1: "K", ray2: "M", count: 2 },
+                            { vertex: "Y", ray1: "X", ray2: "Z", count: 2 }
+                        ]
+                    }),
+                    partAOptions: [
+                        { text: "∠K ≅ ∠X (Given 1-arc angles)", correct: true },
+                        { text: "∠L ≅ ∠Y (Given 2-arc angles)", correct: true },
+                        { text: "LM ≅ YZ (Given 1-tick sides)", correct: true },
+                        { text: "KL ≅ XY (Included side not marked)", correct: false }
                     ],
-                    ticks: [
-                        { from: "J", to: "K", count: 1 },
-                        { from: "M", to: "N", count: 1 },
-                        { from: "K", to: "L", count: 2 },
-                        { from: "N", to: "P", count: 2 }
-                    ]
-                }),
-                partAOptions: [
-                    { text: "JK ≅ MN (Given 1-tick legs)", correct: true },
-                    { text: "∠K ≅ ∠N (Right angles are congruent)", correct: true },
-                    { text: "KL ≅ NP (Given 2-tick legs)", correct: true },
-                    { text: "JL ≅ MP (Hypotenuses are not marked)", correct: false }
-                ],
-                sufficient: true,
-                theorem: "SAS",
-                firstTri: "JKL",
-                secondTri: "MNP",
-                vertexChoices: ["M", "N", "P"],
-                hint: "Be careful! Even though these are right triangles, is the hypotenuse marked? Or do we have the two legs and the 90° angle between them?",
-                explanation: "Although these are right triangles, the hypotenuses (JL and MP) are NOT marked. Instead, we are given both legs and the included 90° right angle between them (JK ≅ MN, ∠K ≅ ∠N, KL ≅ NP). That is SAS, so ΔJKL ≅ ΔMNP!"
-            },
-            {
-                id: 10,
-                category: "shared",
-                badge: "Reflexive Shared Side",
-                caption: "Triangle split by vertical segment AB down the middle.",
-                diagram: buildTemplate("shared_vertical_bisector", ["A", "B", "C", "D"], {
-                    ticks: [
-                        { from: "A", to: "C", count: 1 },
-                        { from: "A", to: "D", count: 1 },
-                        { from: "B", to: "C", count: 2 },
-                        { from: "B", to: "D", count: 2 }
-                    ]
-                }),
-                partAOptions: [
-                    { text: "AC ≅ AD (Given 1-tick sides)", correct: true },
-                    { text: "BC ≅ BD (Given 2-tick sides)", correct: true },
-                    { text: "AB ≅ AB (Reflexive Property — shared side)", correct: true },
-                    { text: "∠C ≅ ∠D (Not marked as given)", correct: false }
-                ],
-                sufficient: true,
-                theorem: "SSS",
-                firstTri: "ABC",
-                secondTri: "ABD",
-                vertexChoices: ["A", "B", "D"],
-                hint: "You have 2 pairs of marked sides, plus both triangles share the center vertical segment AB!",
-                explanation: "We have AC ≅ AD (given), BC ≅ BD (given), and AB ≅ AB by the Reflexive Property. With all three pairs of sides congruent, ΔABC ≅ ΔABD by SSS."
-            },
-            {
-                id: 11,
-                category: "shared",
-                badge: "Reflexive Shared Side",
-                caption: "Kite WXYZ sharing horizontal diagonal WY.",
-                diagram: buildTemplate("shared_kite_horiz", ["W", "Y", "X", "Z"], {
-                    arcs: [
-                        { vertex: "W", ray1: "X", ray2: "Y", count: 1 },
-                        { vertex: "W", ray1: "Z", ray2: "Y", count: 1 },
-                        { vertex: "Y", ray1: "X", ray2: "W", count: 2 },
-                        { vertex: "Y", ray1: "Z", ray2: "W", count: 2 }
-                    ]
-                }),
-                partAOptions: [
-                    { text: "∠XWY ≅ ∠ZWY (Given 1-arc angles)", correct: true },
-                    { text: "∠XYW ≅ ∠ZYW (Given 2-arc angles)", correct: true },
-                    { text: "WY ≅ WY (Reflexive Property — shared side)", correct: true },
-                    { text: "WX ≅ WZ (Not marked)", correct: false }
-                ],
-                sufficient: true,
-                theorem: "ASA",
-                firstTri: "WXY",
-                secondTri: "WZY",
-                vertexChoices: ["W", "Z", "Y"],
-                hint: "Shared side WY connects vertex W (where the 1-arc angles are) and vertex Y (where the 2-arc angles are).",
-                explanation: "We have ∠XWY ≅ ∠ZWY, included shared side WY ≅ WY (Reflexive Property), and ∠XYW ≅ ∠ZYW. By ASA, ΔWXY ≅ ΔWZY."
-            },
-            {
-                id: 12,
-                category: "shared",
-                badge: "Reflexive Trap!",
-                caption: "Check carefully whether the given angle is included between the marked side and the shared side!",
-                diagram: buildTemplate("shared_parallelogram", ["J", "K", "L", "M"], {
-                    ticks: [
-                        { from: "J", to: "K", count: 1 },
-                        { from: "L", to: "M", count: 1 }
+                    sufficient: true,
+                    theorem: "AAS",
+                    firstTri: "KLM",
+                    secondTri: "XYZ",
+                    vertexChoices: ["X", "Y", "Z"],
+                    hint: "The marked side LM is opposite ∠K (not between ∠K and ∠L).",
+                    explanation: "We have ∠K ≅ ∠X, ∠L ≅ ∠Y, and non-included side LM ≅ YZ. By AAS, ΔKLM ≅ ΔXYZ."
+                },
+                {
+                    id: 6,
+                    category: "traps",
+                    badge: "Right Triangles",
+                    caption: "Two right triangles with bottom legs and slanted hypotenuses marked.",
+                    diagram: buildTemplate("detached_right", ["G", "H", "J", "R", "S", "T"], {
+                        rightAngles: [
+                            { vertex: "H", ray1: "G", ray2: "J" },
+                            { vertex: "S", ray1: "R", ray2: "T" }
+                        ],
+                        ticks: [
+                            { from: "H", to: "J", count: 1 },
+                            { from: "S", to: "T", count: 1 },
+                            { from: "G", to: "J", count: 2 },
+                            { from: "R", to: "T", count: 2 }
+                        ]
+                    }),
+                    partAOptions: [
+                        { text: "∠H and ∠S are right angles (90°)", correct: true },
+                        { text: "HJ ≅ ST (Given 1-tick legs)", correct: true },
+                        { text: "GJ ≅ RT (Given 2-tick hypotenuses)", correct: true },
+                        { text: "GH ≅ RS (Not directly marked)", correct: false }
                     ],
-                    arcs: [
-                        { vertex: "L", ray1: "K", ray2: "J", count: 1 },
-                        { vertex: "J", ray1: "M", ray2: "L", count: 1 }
-                    ]
-                }),
-                partAOptions: [
-                    { text: "JK ≅ LM (Given 1-tick sides)", correct: true },
-                    { text: "∠KLJ ≅ ∠MJL (Given 1-arc angles)", correct: true },
-                    { text: "JL ≅ LJ (Reflexive Property — shared side)", correct: true },
-                    { text: "∠KJL ≅ ∠MLJ (Not marked)", correct: false }
-                ],
-                sufficient: false,
-                theorem: "None",
-                firstTri: "JKL",
-                secondTri: "",
-                vertexChoices: ["L", "M", "J"],
-                hint: "Look at ΔJKL: the two known sides are JK and JL (which meet at J), but the marked 1-arc angle is down at L (∠KLJ)! What pattern is Side-Side-Angle?",
-                explanation: "In ΔJKL, the known sides are JK and JL, which form angle ∠KJL. However, the given angle is ∠KLJ, which is NOT included between those two sides! That creates an SSA trap, so there is NOT enough information."
-            },
-            {
-                id: 13,
-                category: "bowtie",
-                badge: "Vertical Angles",
-                caption: "Intersecting segments AD and BC bisecting each other at E.",
-                diagram: buildTemplate("bowtie_horiz", ["E", "A", "B", "D", "C"], {
-                    ticks: [
-                        { from: "A", to: "E", count: 1 },
-                        { from: "D", to: "E", count: 1 },
-                        { from: "B", to: "E", count: 2 },
-                        { from: "C", to: "E", count: 2 }
-                    ]
-                }),
-                partAOptions: [
-                    { text: "AE ≅ DE (Given 1-tick sides)", correct: true },
-                    { text: "BE ≅ CE (Given 2-tick sides)", correct: true },
-                    { text: "∠AEB ≅ ∠DEC (Vertical Angles)", correct: true },
-                    { text: "AB ≅ DC (Not given)", correct: false }
-                ],
-                sufficient: true,
-                theorem: "SAS",
-                firstTri: "AEB",
-                secondTri: "DEC",
-                vertexChoices: ["D", "E", "C"],
-                hint: "Whenever two straight lines cross at E, the opposite angles ∠AEB and ∠DEC are Vertical Angles — right between the 1-tick and 2-tick sides!",
-                explanation: "We have AE ≅ DE (1 tick), vertical angles ∠AEB ≅ ∠DEC, and BE ≅ CE (2 ticks). Since the vertical angles are included between the two pairs of sides, ΔAEB ≅ ΔDEC by SAS."
-            },
-            {
-                id: 14,
-                category: "bowtie",
-                badge: "Vertical Angles",
-                caption: "Horizontal bowtie with outer sides FG ≅ JK and ∠F ≅ ∠J.",
-                diagram: buildTemplate("bowtie_horiz", ["H", "F", "G", "J", "K"], {
-                    ticks: [
-                        { from: "F", to: "G", count: 1 },
-                        { from: "J", to: "K", count: 1 }
+                    sufficient: true,
+                    theorem: "HL",
+                    firstTri: "GHJ",
+                    secondTri: "RST",
+                    vertexChoices: ["R", "S", "T"],
+                    hint: "In a right triangle, the side opposite the 90° box is the Hypotenuse (GJ and RT).",
+                    explanation: "Both ΔGHJ and ΔRST are right triangles with congruent hypotenuses (GJ ≅ RT) and congruent legs (HJ ≅ ST). By HL, ΔGHJ ≅ ΔRST."
+                },
+                {
+                    id: 7,
+                    category: "traps",
+                    badge: "Trap Check!",
+                    caption: "Two triangles with all three pairs of corresponding angles marked congruent.",
+                    diagram: buildTemplate("detached_standard", ["A", "B", "C", "D", "E", "F"], {
+                        arcs: [
+                            { vertex: "A", ray1: "B", ray2: "C", count: 1 },
+                            { vertex: "D", ray1: "E", ray2: "F", count: 1 },
+                            { vertex: "B", ray1: "A", ray2: "C", count: 2 },
+                            { vertex: "E", ray1: "D", ray2: "F", count: 2 },
+                            { vertex: "C", ray1: "A", ray2: "B", count: 3 },
+                            { vertex: "F", ray1: "D", ray2: "E", count: 3 }
+                        ]
+                    }),
+                    partAOptions: [
+                        { text: "∠A ≅ ∠D (Given 1-arc angles)", correct: true },
+                        { text: "∠B ≅ ∠E (Given 2-arc angles)", correct: true },
+                        { text: "∠C ≅ ∠F (Given 3-arc angles)", correct: true },
+                        { text: "AB ≅ DE (No sides are marked)", correct: false }
                     ],
-                    arcs: [
-                        { vertex: "F", ray1: "G", ray2: "H", count: 1 },
-                        { vertex: "J", ray1: "K", ray2: "H", count: 1 }
-                    ]
-                }),
-                partAOptions: [
-                    { text: "FG ≅ JK (Given 1-tick sides)", correct: true },
-                    { text: "∠F ≅ ∠J (Given 1-arc angles)", correct: true },
-                    { text: "∠FHG ≅ ∠JHK (Vertical Angles)", correct: true },
-                    { text: "FH ≅ JH (Not marked)", correct: false }
-                ],
-                sufficient: true,
-                theorem: "AAS",
-                firstTri: "FGH",
-                secondTri: "JKH",
-                vertexChoices: ["J", "K", "H"],
-                hint: "Don't forget the Vertical Angles at H! That gives you two angles (∠F and ∠FHG) and a non-included side (FG).",
-                explanation: "We have ∠F ≅ ∠J (given), ∠FHG ≅ ∠JHK (Vertical Angles), and non-included side FG ≅ JK (given). By AAS, ΔFGH ≅ ΔJKH."
-            },
-            {
-                id: 15,
-                category: "bowtie",
-                badge: "Vertical Angles Trap!",
-                caption: "Bowtie with two pairs of angles marked, but no tick marks on any sides.",
-                diagram: buildTemplate("bowtie_horiz", ["X", "T", "U", "V", "W"], {
-                    arcs: [
-                        { vertex: "T", ray1: "U", ray2: "X", count: 1 },
-                        { vertex: "V", ray1: "W", ray2: "X", count: 1 },
-                        { vertex: "U", ray1: "T", ray2: "X", count: 2 },
-                        { vertex: "W", ray1: "V", ray2: "X", count: 2 }
-                    ]
-                }),
-                partAOptions: [
-                    { text: "∠T ≅ ∠V (Given 1-arc angles)", correct: true },
-                    { text: "∠U ≅ ∠W (Given 2-arc angles)", correct: true },
-                    { text: "∠TXU ≅ ∠VXW (Vertical Angles)", correct: true },
-                    { text: "TX ≅ VX (No sides marked)", correct: false }
-                ],
-                sufficient: false,
-                theorem: "None",
-                firstTri: "TUX",
-                secondTri: "",
-                vertexChoices: ["V", "W", "X"],
-                hint: "We have all three pairs of angles congruent (including the vertical angles at X), but are ANY sides marked congruent?",
-                explanation: "Even with vertical angles ∠TXU ≅ ∠VXW, we only have three pairs of congruent angles (AAA) and zero congruent sides. AAA cannot prove triangles congruent!"
-            }
-        ];
+                    sufficient: false,
+                    theorem: "None",
+                    firstTri: "ABC",
+                    secondTri: "",
+                    vertexChoices: ["D", "E", "F"],
+                    hint: "Can Angle-Angle-Angle (AAA) prove two triangles are the same size, or only the same shape?",
+                    explanation: "Three pairs of congruent angles (AAA) only proves that triangles are similar, NOT congruent. Without at least one pair of congruent sides, there is insufficient information."
+                },
+                {
+                    id: 8,
+                    category: "shared",
+                    badge: "Reflexive Shared Side",
+                    caption: "Isosceles-style triangle split by center segment TM.",
+                    diagram: buildTemplate("shared_vertical_bisector", ["T", "M", "R", "S"], {
+                        ticks: [
+                            { from: "T", to: "R", count: 1 },
+                            { from: "T", to: "S", count: 1 }
+                        ],
+                        arcs: [
+                            { vertex: "T", ray1: "R", ray2: "M", count: 1 },
+                            { vertex: "T", ray1: "S", ray2: "M", count: 1 }
+                        ]
+                    }),
+                    partAOptions: [
+                        { text: "TR ≅ TS (Given 1-tick sides)", correct: true },
+                        { text: "∠RTM ≅ ∠STM (Given 1-arc angles)", correct: true },
+                        { text: "TM ≅ TM (Reflexive Property — shared side)", correct: true },
+                        { text: "RM ≅ SM (Not given)", correct: false }
+                    ],
+                    sufficient: true,
+                    theorem: "SAS",
+                    firstTri: "TRM",
+                    secondTri: "TSM",
+                    vertexChoices: ["T", "S", "M"],
+                    hint: "The marked top angles ∠RTM and ∠STM sit directly between the 1-tick outer sides (TR, TS) and the shared center side TM!",
+                    explanation: "We have TR ≅ TS (given), included angle ∠RTM ≅ ∠STM (given), and shared side TM ≅ TM (Reflexive Property). By SAS, ΔTRM ≅ ΔTSM."
+                },
+                {
+                    id: 9,
+                    category: "shared",
+                    badge: "Reflexive Shared Side",
+                    caption: "Kite ABCD sharing horizontal segment AC.",
+                    diagram: buildTemplate("shared_kite_horiz", ["A", "C", "B", "D"], {
+                        arcs: [
+                            { vertex: "B", ray1: "A", ray2: "C", count: 1 },
+                            { vertex: "D", ray1: "A", ray2: "C", count: 1 },
+                            { vertex: "A", ray1: "B", ray2: "C", count: 2 },
+                            { vertex: "A", ray1: "D", ray2: "C", count: 2 }
+                        ]
+                    }),
+                    partAOptions: [
+                        { text: "∠B ≅ ∠D (Given 1-arc angles)", correct: true },
+                        { text: "∠BAC ≅ ∠DAC (Given 2-arc angles)", correct: true },
+                        { text: "AC ≅ AC (Reflexive Property — shared side)", correct: true },
+                        { text: "AB ≅ AD (Not marked)", correct: false }
+                    ],
+                    sufficient: true,
+                    theorem: "AAS",
+                    firstTri: "ABC",
+                    secondTri: "ADC",
+                    vertexChoices: ["A", "D", "C"],
+                    hint: "Shared side AC touches ∠BAC, but it does NOT touch ∠B! So the side is non-included.",
+                    explanation: "We have ∠B ≅ ∠D, ∠BAC ≅ ∠DAC, and non-included shared side AC ≅ AC (Reflexive Property). By AAS, ΔABC ≅ ΔADC."
+                },
+                {
+                    id: 10,
+                    category: "shared",
+                    badge: "Reflexive Right Δs",
+                    caption: "Rectangle-like figure PQRS with right angles at Q and S and shared diagonal PR.",
+                    diagram: buildTemplate("shared_rectangle", ["P", "Q", "R", "S"], {
+                        rightAngles: [
+                            { vertex: "Q", ray1: "P", ray2: "R" },
+                            { vertex: "S", ray1: "P", ray2: "R" }
+                        ],
+                        ticks: [
+                            { from: "P", to: "Q", count: 1 },
+                            { from: "R", to: "S", count: 1 }
+                        ]
+                    }),
+                    partAOptions: [
+                        { text: "∠Q and ∠S are right angles (90°)", correct: true },
+                        { text: "PQ ≅ RS (Given 1-tick legs)", correct: true },
+                        { text: "PR ≅ RP (Reflexive Property — shared hypotenuse)", correct: true },
+                        { text: "QR ≅ SP (Not given)", correct: false }
+                    ],
+                    sufficient: true,
+                    theorem: "HL",
+                    firstTri: "PQR",
+                    secondTri: "RSP",
+                    vertexChoices: ["R", "S", "P"],
+                    hint: "Shared diagonal PR is opposite both 90° angles (∠Q and ∠S), so PR is the Hypotenuse of both right triangles!",
+                    explanation: "Both ΔPQR and ΔRSP are right triangles sharing hypotenuse PR ≅ RP (Reflexive Property) with congruent legs PQ ≅ RS. By HL, ΔPQR ≅ ΔRSP."
+                },
+                {
+                    id: 11,
+                    category: "shared",
+                    badge: "Reflexive Shared Side",
+                    caption: "Parallelogram EFGH split by diagonal EG with alternate interior angles marked.",
+                    diagram: buildTemplate("shared_parallelogram", ["E", "F", "G", "H"], {
+                        arcs: [
+                            { vertex: "E", ray1: "F", ray2: "G", count: 1 },
+                            { vertex: "G", ray1: "H", ray2: "E", count: 1 },
+                            { vertex: "G", ray1: "F", ray2: "E", count: 2 },
+                            { vertex: "E", ray1: "H", ray2: "G", count: 2 }
+                        ]
+                    }),
+                    partAOptions: [
+                        { text: "∠FEG ≅ ∠HGE (Given 1-arc angles)", correct: true },
+                        { text: "∠FGE ≅ ∠HEG (Given 2-arc angles)", correct: true },
+                        { text: "EG ≅ GE (Reflexive Property — shared side)", correct: true },
+                        { text: "EF ≅ GH (Not directly marked)", correct: false }
+                    ],
+                    sufficient: true,
+                    theorem: "ASA",
+                    firstTri: "EFG",
+                    secondTri: "GHE",
+                    vertexChoices: ["G", "H", "E"],
+                    hint: "Shared diagonal EG is directly between the 1-arc and 2-arc angles in each triangle! Watch the vertex correspondence carefully.",
+                    explanation: "We have ∠FEG ≅ ∠HGE (1 arc), included shared side EG ≅ GE (Reflexive), and ∠FGE ≅ ∠HEG (2 arcs). By ASA, ΔEFG ≅ ΔGHE."
+                },
+                {
+                    id: 12,
+                    category: "bowtie",
+                    badge: "Vertical Angles",
+                    caption: "Bowtie with ∠J ≅ ∠L and segments JM ≅ LM meeting at center M.",
+                    diagram: buildTemplate("bowtie_horiz", ["M", "J", "K", "L", "N"], {
+                        ticks: [
+                            { from: "J", to: "M", count: 1 },
+                            { from: "L", to: "M", count: 1 }
+                        ],
+                        arcs: [
+                            { vertex: "J", ray1: "K", ray2: "M", count: 1 },
+                            { vertex: "L", ray1: "N", ray2: "M", count: 1 }
+                        ]
+                    }),
+                    partAOptions: [
+                        { text: "∠J ≅ ∠L (Given 1-arc angles)", correct: true },
+                        { text: "JM ≅ LM (Given 1-tick sides)", correct: true },
+                        { text: "∠JMK ≅ ∠LMN (Vertical Angles)", correct: true },
+                        { text: "JK ≅ LN (Not marked)", correct: false }
+                    ],
+                    sufficient: true,
+                    theorem: "ASA",
+                    firstTri: "JKM",
+                    secondTri: "LNM",
+                    vertexChoices: ["L", "N", "M"],
+                    hint: "With Vertical Angles at M, segment JM sits right between ∠J and ∠JMK!",
+                    explanation: "We have ∠J ≅ ∠L (given), included side JM ≅ LM (given), and vertical angles ∠JMK ≅ ∠LMN. By ASA, ΔJKM ≅ ΔLNM."
+                },
+                {
+                    id: 13,
+                    category: "bowtie",
+                    badge: "Vertical Angles Trap!",
+                    caption: "Bowtie intersecting at P with outer sides AB ≅ CD and upper segments AP ≅ CP.",
+                    diagram: buildTemplate("bowtie_horiz", ["P", "A", "B", "C", "D"], {
+                        ticks: [
+                            { from: "A", to: "B", count: 1 },
+                            { from: "C", to: "D", count: 1 },
+                            { from: "A", to: "P", count: 2 },
+                            { from: "C", to: "P", count: 2 }
+                        ]
+                    }),
+                    partAOptions: [
+                        { text: "AB ≅ CD (Given 1-tick sides)", correct: true },
+                        { text: "AP ≅ CP (Given 2-tick sides)", correct: true },
+                        { text: "∠APB ≅ ∠CPD (Vertical Angles)", correct: true },
+                        { text: "∠A ≅ ∠C (Included angle not given)", correct: false }
+                    ],
+                    sufficient: false,
+                    theorem: "None",
+                    firstTri: "ABP",
+                    secondTri: "",
+                    vertexChoices: ["C", "D", "P"],
+                    hint: "Look closely: the two marked sides in ΔABP are AB and AP (which meet at A), while the vertical angle is at P! Is the angle between the two sides?",
+                    explanation: "Even though ∠APB ≅ ∠CPD by Vertical Angles, those angles are NOT included between the marked sides AB and AP! That forms SSA, which cannot prove congruence."
+                },
+                {
+                    id: 14,
+                    category: "traps",
+                    badge: "Right Triangles",
+                    caption: "Two right triangles with congruent acute angles ∠U ≅ ∠X and congruent hypotenuses.",
+                    diagram: buildTemplate("detached_right", ["U", "V", "W", "X", "Y", "Z"], {
+                        rightAngles: [
+                            { vertex: "V", ray1: "U", ray2: "W" },
+                            { vertex: "Y", ray1: "X", ray2: "Z" }
+                        ],
+                        ticks: [
+                            { from: "U", to: "W", count: 1 },
+                            { from: "X", to: "Z", count: 1 }
+                        ],
+                        arcs: [
+                            { vertex: "U", ray1: "V", ray2: "W", count: 1 },
+                            { vertex: "X", ray1: "Y", ray2: "Z", count: 1 }
+                        ]
+                    }),
+                    partAOptions: [
+                        { text: "∠V ≅ ∠Y (Right angles are congruent)", correct: true },
+                        { text: "∠U ≅ ∠X (Given 1-arc angles)", correct: true },
+                        { text: "UW ≅ XZ (Given 1-tick sides)", correct: true },
+                        { text: "UV ≅ XY (Legs are not marked)", correct: false }
+                    ],
+                    sufficient: true,
+                    theorem: "AAS",
+                    firstTri: "UVW",
+                    secondTri: "XYZ",
+                    vertexChoices: ["X", "Y", "Z"],
+                    hint: "Be careful: HL requires a Hypotenuse and a LEG, but here you are given an acute ANGLE (∠U ≅ ∠X), a 90° angle, and a non-included side!",
+                    explanation: "We have two pairs of angles (∠U ≅ ∠X and right angles ∠V ≅ ∠Y) and a non-included side (UW ≅ XZ). That proves ΔUVW ≅ ΔXYZ by AAS (not HL, since no leg is marked!)."
+                },
+                {
+                    id: 15,
+                    category: "detached",
+                    badge: "Detached Triangles",
+                    caption: "Two triangles with all three pairs of sides marked congruent.",
+                    diagram: buildTemplate("detached_standard", ["C", "D", "E", "F", "G", "H"], {
+                        ticks: [
+                            { from: "C", to: "D", count: 1 },
+                            { from: "F", to: "G", count: 1 },
+                            { from: "D", to: "E", count: 2 },
+                            { from: "G", to: "H", count: 2 },
+                            { from: "C", to: "E", count: 3 },
+                            { from: "F", to: "H", count: 3 }
+                        ]
+                    }),
+                    partAOptions: [
+                        { text: "CD ≅ FG (Given 1-tick sides)", correct: true },
+                        { text: "DE ≅ GH (Given 2-tick sides)", correct: true },
+                        { text: "CE ≅ FH (Given 3-tick sides)", correct: true },
+                        { text: "∠D ≅ ∠G (Not given)", correct: false }
+                    ],
+                    sufficient: true,
+                    theorem: "SSS",
+                    firstTri: "CDE",
+                    secondTri: "FGH",
+                    vertexChoices: ["F", "G", "H"],
+                    hint: "All 3 pairs of corresponding sides are marked with 1, 2, and 3 ticks.",
+                    explanation: "With CD ≅ FG, DE ≅ GH, and CE ≅ FH, all three pairs of sides are congruent. By SSS, ΔCDE ≅ ΔFGH."
+                }
+            ],
+
+            // =========================================================================
+            // TEST 3 (15 QUESTIONS): TEST-DAY CHALLENGE & TRAP-PROOFING
+            // =========================================================================
+            3: [
+                {
+                    id: 1,
+                    category: "quiz",
+                    badge: "Handout Style (#1)",
+                    caption: "Collinear base M–N–R with two pairs of base angles and the included base segments marked.",
+                    diagram: buildTemplate("quiz1_collinear", ["M", "N", "P", "Q", "R"], {
+                        ticks: [
+                            { from: "M", to: "N", count: 1 },
+                            { from: "N", to: "R", count: 1 }
+                        ],
+                        arcs: [
+                            { vertex: "M", ray1: "P", ray2: "N", count: 1 },
+                            { vertex: "N", ray1: "Q", ray2: "R", count: 1 },
+                            { vertex: "N", ray1: "M", ray2: "P", count: 2 },
+                            { vertex: "R", ray1: "N", ray2: "Q", count: 2 }
+                        ]
+                    }),
+                    partAOptions: [
+                        { text: "∠M ≅ ∠QNR (Given 1-arc angles)", correct: true },
+                        { text: "MN ≅ NR (Given 1-tick included sides)", correct: true },
+                        { text: "∠MNP ≅ ∠R (Given 2-arc angles)", correct: true },
+                        { text: "MP ≅ NQ (Not given)", correct: false }
+                    ],
+                    sufficient: true,
+                    theorem: "ASA",
+                    firstTri: "MNP",
+                    secondTri: "NRQ",
+                    vertexChoices: ["N", "R", "Q"],
+                    hint: "Notice how segment MN is directly between ∠M (1 arc) and ∠MNP (2 arcs)!",
+                    explanation: "In ΔMNP and ΔNRQ, we have ∠M ≅ ∠QNR, included side MN ≅ NR, and ∠MNP ≅ ∠R. By ASA, ΔMNP ≅ ΔNRQ."
+                },
+                {
+                    id: 2,
+                    category: "quiz",
+                    badge: "Handout Style (#2)",
+                    caption: "Two triangles sharing center segment BC with two pairs of angles marked.",
+                    diagram: buildTemplate("quiz2_shared_diag", ["A", "B", "C", "D"], {
+                        arcs: [
+                            { vertex: "A", ray1: "B", ray2: "C", count: 1 },
+                            { vertex: "D", ray1: "C", ray2: "B", count: 1 },
+                            { vertex: "B", ray1: "A", ray2: "C", count: 2 },
+                            { vertex: "C", ray1: "D", ray2: "B", count: 2 }
+                        ]
+                    }),
+                    partAOptions: [
+                        { text: "∠A ≅ ∠D (Given 1-arc angles)", correct: true },
+                        { text: "∠ABC ≅ ∠DCB (Given 2-arc angles)", correct: true },
+                        { text: "BC ≅ CB (Reflexive Property — shared side)", correct: true },
+                        { text: "AB ≅ DC (Not given)", correct: false }
+                    ],
+                    sufficient: true,
+                    theorem: "AAS",
+                    firstTri: "ABC",
+                    secondTri: "DCB",
+                    vertexChoices: ["D", "C", "B"],
+                    hint: "Shared side BC is opposite the 1-arc angles (∠A and ∠D), so it is a non-included side.",
+                    explanation: "We have ∠A ≅ ∠D (1 arc), ∠ABC ≅ ∠DCB (2 arcs), and non-included shared side BC ≅ CB (Reflexive Property). By AAS, ΔABC ≅ ΔDCB."
+                },
+                {
+                    id: 3,
+                    category: "quiz",
+                    badge: "Handout Style (#3)",
+                    caption: "Bowtie intersecting at H with outer sides FG ≅ JK and ∠G ≅ ∠K.",
+                    diagram: buildTemplate("quiz3_bowtie_vert", ["F", "G", "H", "J", "K"], {
+                        ticks: [
+                            { from: "F", to: "G", count: 1 },
+                            { from: "J", to: "K", count: 1 }
+                        ],
+                        arcs: [
+                            { vertex: "G", ray1: "F", ray2: "H", count: 1 },
+                            { vertex: "K", ray1: "J", ray2: "H", count: 1 }
+                        ]
+                    }),
+                    partAOptions: [
+                        { text: "∠G ≅ ∠K (Given 1-arc angles)", correct: true },
+                        { text: "FG ≅ JK (Given 1-tick sides)", correct: true },
+                        { text: "∠FHG ≅ ∠JHK (Vertical Angles)", correct: true },
+                        { text: "FH ≅ JH (Not marked)", correct: false }
+                    ],
+                    sufficient: true,
+                    theorem: "AAS",
+                    firstTri: "FHG",
+                    secondTri: "JHK",
+                    vertexChoices: ["J", "H", "K"],
+                    hint: "Combine the Vertical Angles at H with ∠G ≅ ∠K and non-included side FG ≅ JK!",
+                    explanation: "We have vertical angles ∠FHG ≅ ∠JHK, given angles ∠G ≅ ∠K, and non-included sides FG ≅ JK. By AAS, ΔFHG ≅ ΔJHK."
+                },
+                {
+                    id: 4,
+                    category: "quiz",
+                    badge: "Handout Style (#4)",
+                    caption: "Two inverted triangles with two pairs of sides and the included angle marked.",
+                    diagram: buildTemplate("quiz4_detached_inv", ["P", "Q", "R", "U", "V", "W"], {
+                        ticks: [
+                            { from: "P", to: "Q", count: 1 },
+                            { from: "W", to: "V", count: 1 },
+                            { from: "Q", to: "R", count: 2 },
+                            { from: "V", to: "U", count: 2 }
+                        ],
+                        arcs: [
+                            { vertex: "Q", ray1: "P", ray2: "R", count: 1 },
+                            { vertex: "V", ray1: "W", ray2: "U", count: 1 }
+                        ]
+                    }),
+                    partAOptions: [
+                        { text: "PQ ≅ WV (Given 1-tick sides)", correct: true },
+                        { text: "∠Q ≅ ∠V (Given 1-arc included angles)", correct: true },
+                        { text: "QR ≅ VU (Given 2-tick sides)", correct: true },
+                        { text: "PR ≅ WU (Not marked)", correct: false }
+                    ],
+                    sufficient: true,
+                    theorem: "SAS",
+                    firstTri: "PQR",
+                    secondTri: "WVU",
+                    vertexChoices: ["W", "V", "U"],
+                    hint: "Match the vertices carefully: P is at the end of the 1-tick side, Q has the 1-arc angle, and R is at the end of the 2-tick side.",
+                    explanation: "We have PQ ≅ WV (1 tick), included angle ∠Q ≅ ∠V (1 arc), and QR ≅ VU (2 ticks). Matching vertices in order gives ΔPQR ≅ ΔWVU by SAS."
+                },
+                {
+                    id: 5,
+                    category: "shared",
+                    badge: "Reflexive Right Δs",
+                    caption: "Right triangles ΔXYW and ΔXYZ sharing vertical altitude XY.",
+                    diagram: buildTemplate("shared_vertical_bisector", ["X", "Y", "W", "Z"], {
+                        rightAngles: [
+                            { vertex: "Y", ray1: "X", ray2: "W" },
+                            { vertex: "Y", ray1: "X", ray2: "Z" }
+                        ],
+                        ticks: [
+                            { from: "X", to: "W", count: 2 },
+                            { from: "X", to: "Z", count: 2 }
+                        ]
+                    }),
+                    partAOptions: [
+                        { text: "∠XYW and ∠XYZ are right angles (90°)", correct: true },
+                        { text: "XW ≅ XZ (Given 2-tick hypotenuses)", correct: true },
+                        { text: "XY ≅ XY (Reflexive Property — shared leg)", correct: true },
+                        { text: "YW ≅ YZ (Not directly marked)", correct: false }
+                    ],
+                    sufficient: true,
+                    theorem: "HL",
+                    firstTri: "XYW",
+                    secondTri: "XYZ",
+                    vertexChoices: ["X", "Y", "Z"],
+                    hint: "In right triangles ΔXYW and ΔXYZ, XW and XZ are opposite the 90° angles (Hypotenuses) and XY is a shared Leg!",
+                    explanation: "Both triangles are right triangles with congruent hypotenuses (XW ≅ XZ) and a shared leg (XY ≅ XY by the Reflexive Property). By HL, ΔXYW ≅ ΔXYZ."
+                },
+                {
+                    id: 6,
+                    category: "shared",
+                    badge: "HL vs. SAS Check!",
+                    caption: "Right triangles ΔKLJ and ΔKLM sharing vertical leg KL with base legs JL ≅ ML.",
+                    diagram: buildTemplate("shared_vertical_bisector", ["K", "L", "J", "M"], {
+                        rightAngles: [
+                            { vertex: "L", ray1: "K", ray2: "J" },
+                            { vertex: "L", ray1: "K", ray2: "M" }
+                        ],
+                        ticks: [
+                            { from: "J", to: "L", count: 1 },
+                            { from: "M", to: "L", count: 1 }
+                        ]
+                    }),
+                    partAOptions: [
+                        { text: "JL ≅ ML (Given 1-tick legs)", correct: true },
+                        { text: "∠KLJ ≅ ∠KLM (Right angles are congruent)", correct: true },
+                        { text: "KL ≅ KL (Reflexive Property — shared leg)", correct: true },
+                        { text: "KJ ≅ KM (Hypotenuses not marked)", correct: false }
+                    ],
+                    sufficient: true,
+                    theorem: "SAS",
+                    firstTri: "KLJ",
+                    secondTri: "KLM",
+                    vertexChoices: ["K", "L", "M"],
+                    hint: "Compare this to #5: here the slanted hypotenuses (KJ and KM) are NOT marked! Instead, you have both legs and the 90° angle between them.",
+                    explanation: "Because we know the two legs (JL ≅ ML and shared leg KL ≅ KL) and the included 90° angle (∠KLJ ≅ ∠KLM), the triangles are congruent by SAS (not HL!)."
+                },
+                {
+                    id: 7,
+                    category: "shared",
+                    badge: "Reflexive Shared Side",
+                    caption: "Kite RSTU sharing center horizontal diagonal RT.",
+                    diagram: buildTemplate("shared_kite_horiz", ["R", "T", "S", "U"], {
+                        ticks: [
+                            { from: "R", to: "S", count: 1 },
+                            { from: "R", to: "U", count: 1 },
+                            { from: "T", to: "S", count: 2 },
+                            { from: "T", to: "U", count: 2 }
+                        ]
+                    }),
+                    partAOptions: [
+                        { text: "RS ≅ RU (Given 1-tick sides)", correct: true },
+                        { text: "TS ≅ TU (Given 2-tick sides)", correct: true },
+                        { text: "RT ≅ RT (Reflexive Property — shared side)", correct: true },
+                        { text: "∠S ≅ ∠U (Not marked)", correct: false }
+                    ],
+                    sufficient: true,
+                    theorem: "SSS",
+                    firstTri: "RST",
+                    secondTri: "RUT",
+                    vertexChoices: ["R", "U", "T"],
+                    hint: "Both pairs of outer kite sides are marked, and diagonal RT is shared by both triangles!",
+                    explanation: "We have RS ≅ RU (1 tick), TS ≅ TU (2 ticks), and shared diagonal RT ≅ RT (Reflexive Property). By SSS, ΔRST ≅ ΔRUT."
+                },
+                {
+                    id: 8,
+                    category: "shared",
+                    badge: "Reflexive Shared Side",
+                    caption: "Parallelogram ABCD with opposite sides congruent and shared diagonal AC.",
+                    diagram: buildTemplate("shared_parallelogram", ["A", "B", "C", "D"], {
+                        ticks: [
+                            { from: "A", to: "B", count: 1 },
+                            { from: "C", to: "D", count: 1 },
+                            { from: "B", to: "C", count: 2 },
+                            { from: "D", to: "A", count: 2 }
+                        ]
+                    }),
+                    partAOptions: [
+                        { text: "AB ≅ CD (Given 1-tick sides)", correct: true },
+                        { text: "BC ≅ DA (Given 2-tick sides)", correct: true },
+                        { text: "AC ≅ CA (Reflexive Property — shared side)", correct: true },
+                        { text: "∠B ≅ ∠D (Not marked as given)", correct: false }
+                    ],
+                    sufficient: true,
+                    theorem: "SSS",
+                    firstTri: "ABC",
+                    secondTri: "CDA",
+                    vertexChoices: ["C", "D", "A"],
+                    hint: "Watch the vertex order! In ΔABC, going from A to B is along the 1-tick side, and B to C is along the 2-tick side. Which path matches that in the bottom triangle?",
+                    explanation: "With AB ≅ CD (1 tick), BC ≅ DA (2 ticks), and AC ≅ CA (Reflexive Property), the triangles are congruent by SSS. Matching corresponding vertices gives ΔABC ≅ ΔCDA."
+                },
+                {
+                    id: 9,
+                    category: "bowtie",
+                    badge: "Right Bowtie",
+                    caption: "Right-triangle bowtie with right angles at B and E, legs BC ≅ EC, and hypotenuses AC ≅ DC.",
+                    diagram: buildTemplate("bowtie_horiz", ["C", "A", "B", "D", "E"], {
+                        rightAngles: [
+                            { vertex: "B", ray1: "A", ray2: "C" },
+                            { vertex: "E", ray1: "D", ray2: "C" }
+                        ],
+                        ticks: [
+                            { from: "B", to: "C", count: 1 },
+                            { from: "E", to: "C", count: 1 },
+                            { from: "A", to: "C", count: 2 },
+                            { from: "D", to: "C", count: 2 }
+                        ]
+                    }),
+                    partAOptions: [
+                        { text: "∠B and ∠E are right angles (90°)", correct: true },
+                        { text: "BC ≅ EC (Given 1-tick legs)", correct: true },
+                        { text: "AC ≅ DC (Given 2-tick hypotenuses)", correct: true },
+                        { text: "AB ≅ DE (Not directly marked)", correct: false }
+                    ],
+                    sufficient: true,
+                    theorem: "HL",
+                    firstTri: "ABC",
+                    secondTri: "DEC",
+                    vertexChoices: ["D", "E", "C"],
+                    hint: "Both triangles in this bowtie have a 90° angle (at B and E), a 2-tick Hypotenuse (AC and DC), and a 1-tick Leg (BC and EC)!",
+                    explanation: "ΔABC and ΔDEC are right triangles with congruent hypotenuses (AC ≅ DC) and one pair of congruent legs (BC ≅ EC). By HL, ΔABC ≅ ΔDEC."
+                },
+                {
+                    id: 10,
+                    category: "traps",
+                    badge: "Trap Check!",
+                    caption: "Two detached triangles with two pairs of sides and a non-included angle marked.",
+                    diagram: buildTemplate("detached_standard", ["L", "M", "N", "P", "Q", "R"], {
+                        ticks: [
+                            { from: "L", to: "M", count: 1 },
+                            { from: "P", to: "Q", count: 1 },
+                            { from: "M", to: "N", count: 2 },
+                            { from: "Q", to: "R", count: 2 }
+                        ],
+                        arcs: [
+                            { vertex: "N", ray1: "L", ray2: "M", count: 1 },
+                            { vertex: "R", ray1: "P", ray2: "Q", count: 1 }
+                        ]
+                    }),
+                    partAOptions: [
+                        { text: "LM ≅ PQ (Given 1-tick sides)", correct: true },
+                        { text: "MN ≅ QR (Given 2-tick sides)", correct: true },
+                        { text: "∠N ≅ ∠R (Given 1-arc angles)", correct: true },
+                        { text: "∠M ≅ ∠Q (Included angle not given)", correct: false }
+                    ],
+                    sufficient: false,
+                    theorem: "None",
+                    firstTri: "LMN",
+                    secondTri: "",
+                    vertexChoices: ["P", "Q", "R"],
+                    hint: "In ΔLMN, sides LM and MN meet at vertex M, so ∠M is the included angle. Instead, ∠N is marked!",
+                    explanation: "The given parts form SSA (two sides and a non-included angle at N and R). Because SSA is not a valid congruence theorem, there is insufficient information."
+                },
+                {
+                    id: 11,
+                    category: "traps",
+                    badge: "Right Triangles",
+                    caption: "Two right triangles with bottom legs EF ≅ HJ and acute angles ∠F ≅ ∠J.",
+                    diagram: buildTemplate("detached_right", ["D", "E", "F", "G", "H", "J"], {
+                        rightAngles: [
+                            { vertex: "E", ray1: "D", ray2: "F" },
+                            { vertex: "H", ray1: "G", ray2: "J" }
+                        ],
+                        ticks: [
+                            { from: "E", to: "F", count: 1 },
+                            { from: "H", to: "J", count: 1 }
+                        ],
+                        arcs: [
+                            { vertex: "F", ray1: "D", ray2: "E", count: 1 },
+                            { vertex: "J", ray1: "G", ray2: "H", count: 1 }
+                        ]
+                    }),
+                    partAOptions: [
+                        { text: "∠E ≅ ∠H (Right angles are congruent)", correct: true },
+                        { text: "EF ≅ HJ (Given 1-tick included sides)", correct: true },
+                        { text: "∠F ≅ ∠J (Given 1-arc angles)", correct: true },
+                        { text: "DF ≅ GJ (Hypotenuses not marked)", correct: false }
+                    ],
+                    sufficient: true,
+                    theorem: "ASA",
+                    firstTri: "DEF",
+                    secondTri: "GHJ",
+                    vertexChoices: ["G", "H", "J"],
+                    hint: "Look at the bottom leg EF: it connects the 90° angle at E and the 1-arc angle at F!",
+                    explanation: "We have right angles ∠E ≅ ∠H, included side EF ≅ HJ, and ∠F ≅ ∠J. By ASA, ΔDEF ≅ ΔGHJ."
+                },
+                {
+                    id: 12,
+                    category: "shared",
+                    badge: "Reflexive Trap!",
+                    caption: "Kite MNPQ sharing horizontal segment MP with left sides MN ≅ MQ and right angles at P.",
+                    diagram: buildTemplate("shared_kite_horiz", ["M", "P", "N", "Q"], {
+                        ticks: [
+                            { from: "M", to: "N", count: 1 },
+                            { from: "M", to: "Q", count: 1 }
+                        ],
+                        arcs: [
+                            { vertex: "P", ray1: "N", ray2: "M", count: 1 },
+                            { vertex: "P", ray1: "Q", ray2: "M", count: 1 }
+                        ]
+                    }),
+                    partAOptions: [
+                        { text: "MN ≅ MQ (Given 1-tick sides)", correct: true },
+                        { text: "∠MPN ≅ ∠MPQ (Given 1-arc angles)", correct: true },
+                        { text: "MP ≅ MP (Reflexive Property — shared side)", correct: true },
+                        { text: "∠NMP ≅ ∠QMP (Included angle not given)", correct: false }
+                    ],
+                    sufficient: false,
+                    theorem: "None",
+                    firstTri: "MNP",
+                    secondTri: "",
+                    vertexChoices: ["M", "Q", "P"],
+                    hint: "In ΔMNP, the known sides are MN (1 tick) and shared side MP, which meet at vertex M. Where is the marked angle?",
+                    explanation: "The two known sides (MN and MP) meet at M, while the given 1-arc angle is at P (∠MPN). That forms SSA, which is insufficient to prove congruence!"
+                },
+                {
+                    id: 13,
+                    category: "bowtie",
+                    badge: "Vertical Angles",
+                    caption: "Horizontal bowtie intersecting at R with ∠P ≅ ∠S and PR ≅ SR.",
+                    diagram: buildTemplate("bowtie_horiz", ["R", "P", "Q", "S", "T"], {
+                        ticks: [
+                            { from: "P", to: "R", count: 1 },
+                            { from: "S", to: "R", count: 1 }
+                        ],
+                        arcs: [
+                            { vertex: "P", ray1: "Q", ray2: "R", count: 1 },
+                            { vertex: "S", ray1: "T", ray2: "R", count: 1 }
+                        ]
+                    }),
+                    partAOptions: [
+                        { text: "∠P ≅ ∠S (Given 1-arc angles)", correct: true },
+                        { text: "PR ≅ SR (Given 1-tick included sides)", correct: true },
+                        { text: "∠PRQ ≅ ∠SRT (Vertical Angles)", correct: true },
+                        { text: "PQ ≅ ST (Not given)", correct: false }
+                    ],
+                    sufficient: true,
+                    theorem: "ASA",
+                    firstTri: "PQR",
+                    secondTri: "STR",
+                    vertexChoices: ["S", "T", "R"],
+                    hint: "Segment PR connects ∠P (1 arc) and the Vertical Angle at R (∠PRQ).",
+                    explanation: "We have ∠P ≅ ∠S, included side PR ≅ SR, and vertical angles ∠PRQ ≅ ∠SRT. By ASA, ΔPQR ≅ ΔSTR."
+                },
+                {
+                    id: 14,
+                    category: "detached",
+                    badge: "Detached Triangles",
+                    caption: "Two detached triangles with top angles ∠A ≅ ∠X between two pairs of marked sides.",
+                    diagram: buildTemplate("detached_standard", ["A", "B", "C", "X", "Y", "Z"], {
+                        ticks: [
+                            { from: "A", to: "B", count: 2 },
+                            { from: "X", to: "Y", count: 2 },
+                            { from: "A", to: "C", count: 1 },
+                            { from: "X", to: "Z", count: 1 }
+                        ],
+                        arcs: [
+                            { vertex: "A", ray1: "B", ray2: "C", count: 1 },
+                            { vertex: "X", ray1: "Y", ray2: "Z", count: 1 }
+                        ]
+                    }),
+                    partAOptions: [
+                        { text: "AB ≅ XY (Given 2-tick sides)", correct: true },
+                        { text: "∠A ≅ ∠X (Given 1-arc included angles)", correct: true },
+                        { text: "AC ≅ XZ (Given 1-tick sides)", correct: true },
+                        { text: "BC ≅ YZ (Not given)", correct: false }
+                    ],
+                    sufficient: true,
+                    theorem: "SAS",
+                    firstTri: "ABC",
+                    secondTri: "XYZ",
+                    vertexChoices: ["X", "Y", "Z"],
+                    hint: "Top angle ∠A sits directly between 2-tick side AB and 1-tick side AC!",
+                    explanation: "We have AB ≅ XY (2 ticks), included angle ∠A ≅ ∠X (1 arc), and AC ≅ XZ (1 tick). By SAS, ΔABC ≅ ΔXYZ."
+                },
+                {
+                    id: 15,
+                    category: "quiz",
+                    badge: "Vertex Order Challenge",
+                    caption: "Two inverted triangles with two pairs of angles and one non-included side marked.",
+                    diagram: buildTemplate("quiz4_detached_inv", ["G", "H", "J", "K", "L", "M"], {
+                        ticks: [
+                            { from: "H", to: "J", count: 1 },
+                            { from: "L", to: "K", count: 1 }
+                        ],
+                        arcs: [
+                            { vertex: "G", ray1: "H", ray2: "J", count: 1 },
+                            { vertex: "M", ray1: "L", ray2: "K", count: 1 },
+                            { vertex: "J", ray1: "G", ray2: "H", count: 2 },
+                            { vertex: "K", ray1: "M", ray2: "L", count: 2 }
+                        ]
+                    }),
+                    partAOptions: [
+                        { text: "∠G ≅ ∠M (Given 1-arc angles)", correct: true },
+                        { text: "∠J ≅ ∠K (Given 2-arc angles)", correct: true },
+                        { text: "HJ ≅ LK (Given 1-tick sides)", correct: true },
+                        { text: "GH ≅ ML (Not marked)", correct: false }
+                    ],
+                    sufficient: true,
+                    theorem: "AAS",
+                    firstTri: "GHJ",
+                    secondTri: "MLK",
+                    vertexChoices: ["M", "L", "K"],
+                    hint: "Match the angles first: G (1 arc) matches M (1 arc); J (2 arcs) matches K (2 arcs); so H must match L!",
+                    explanation: "We have ∠G ≅ ∠M (1 arc), ∠J ≅ ∠K (2 arcs), and non-included side HJ ≅ LK (opposite the 1-arc angle). Matching vertices in order gives ΔGHJ ≅ ΔMLK by AAS."
+                }
+            ]
+        };
 
         const THEOREMS = ["SSS", "SAS", "ASA", "AAS", "HL", "None"];
 
+        let currentTestId = 1;
         let currentIndex = 0;
         let currentFilter = "all";
         let userState = {};
 
+        function getActiveQuestions() {
+            return ALL_TESTS[currentTestId];
+        }
+
         function initUserState() {
-            userState = {};
-            QUESTIONS.forEach(q => {
-                userState[q.id] = {
-                    partA: [],
-                    sufficient: null,
-                    theorem: null,
-                    secondTri: "",
-                    checked: false,
-                    isCorrect: false,
-                    partACorrect: false,
-                    partBCorrect: false,
-                    partCCorrect: false
-                };
+            userState = { 1: {}, 2: {}, 3: {} };
+            [1, 2, 3].forEach(tId => {
+                ALL_TESTS[tId].forEach(q => {
+                    userState[tId][q.id] = createBlankQuestionState();
+                });
+            });
+        }
+
+        function createBlankQuestionState() {
+            return {
+                partA: [],
+                sufficient: null,
+                theorem: null,
+                secondTri: "",
+                checked: false,
+                isCorrect: false,
+                partACorrect: false,
+                partBCorrect: false,
+                partCCorrect: false
+            };
+        }
+
+        function switchTest(testId) {
+            currentTestId = testId;
+            currentIndex = 0;
+            currentFilter = "all";
+            setFilter("all");
+            if (!document.getElementById("worksheet-view").classList.contains("hidden")) {
+                renderWorksheetView();
+            }
+        }
+
+        function renderTestSwitcher() {
+            [1, 2, 3].forEach(tId => {
+                const tab = document.getElementById(`test-tab-${tId}`);
+                const badge = document.getElementById(`test-badge-${tId}`);
+                const scoreBox = document.getElementById(`test-score-${tId}`);
+                const printTab = document.getElementById(`print-tab-${tId}`);
+
+                let answered = 0;
+                let correct = 0;
+                ALL_TESTS[tId].forEach(q => {
+                    const st = userState[tId][q.id];
+                    if (st.checked) {
+                        answered++;
+                        if (st.isCorrect) correct++;
+                    }
+                });
+
+                scoreBox.textContent = answered > 0 ? `${correct}/${answered} (${answered}/15)` : `0/15`;
+
+                if (tId === currentTestId) {
+                    tab.className = "p-3.5 rounded-2xl border-2 border-indigo-600 bg-indigo-50/70 text-left transition flex items-center justify-between shadow-xs ring-1 ring-indigo-600";
+                    badge.className = "px-2 py-0.5 rounded-md text-xs font-extrabold uppercase bg-indigo-600 text-white";
+                    scoreBox.className = "text-xs font-extrabold text-indigo-900 bg-indigo-100 px-2.5 py-1 rounded-lg border border-indigo-200";
+                    if (printTab) {
+                        printTab.className = "px-3 py-1.5 rounded-lg text-xs font-bold bg-indigo-600 text-white shadow-2xs transition";
+                    }
+                } else {
+                    tab.className = "p-3.5 rounded-2xl border-2 border-slate-200 bg-white hover:border-indigo-300 text-left transition flex items-center justify-between";
+                    badge.className = "px-2 py-0.5 rounded-md text-xs font-extrabold uppercase bg-slate-200 text-slate-700";
+                    scoreBox.className = "text-xs font-extrabold text-slate-700 bg-slate-100 px-2.5 py-1 rounded-lg";
+                    if (printTab) {
+                        printTab.className = "px-3 py-1.5 rounded-lg text-xs font-bold text-slate-600 hover:text-slate-900 transition";
+                    }
+                }
             });
         }
 
@@ -1161,8 +2175,8 @@
                 }
             });
 
-            // Jump to the first question matching the selected filter
-            const matchingIdx = QUESTIONS.findIndex(q => matchesFilter(q));
+            const questions = getActiveQuestions();
+            const matchingIdx = questions.findIndex(q => matchesFilter(q));
             if (matchingIdx !== -1) {
                 currentIndex = matchingIdx;
             }
@@ -1171,16 +2185,17 @@
 
         function matchesFilter(q) {
             if (currentFilter === "all") return true;
-            if (currentFilter === "unanswered") return !userState[q.id].checked;
+            if (currentFilter === "unanswered") return !userState[currentTestId][q.id].checked;
             if (currentFilter === "traps") return q.category === "traps" || q.category === "detached";
             return q.category === currentFilter;
         }
 
         function renderNavGrid() {
+            const questions = getActiveQuestions();
             const navGrid = document.getElementById("question-nav-grid");
-            navGrid.innerHTML = QUESTIONS.map((q, idx) => {
+            navGrid.innerHTML = questions.map((q, idx) => {
                 if (!matchesFilter(q)) return "";
-                const st = userState[q.id];
+                const st = userState[currentTestId][q.id];
                 const isCurrent = idx === currentIndex;
 
                 let btnStyle = "bg-slate-100 text-slate-700 border-slate-200 hover:bg-slate-200";
@@ -1201,28 +2216,31 @@
         }
 
         function updateHeaderStats() {
+            const questions = getActiveQuestions();
             let answeredCount = 0;
             let scoreCount = 0;
 
-            QUESTIONS.forEach(q => {
-                const st = userState[q.id];
+            questions.forEach(q => {
+                const st = userState[currentTestId][q.id];
                 if (st.checked) {
                     answeredCount++;
                     if (st.isCorrect) scoreCount++;
                 }
             });
 
+            document.getElementById("stat-test-label").textContent = `Test ${currentTestId}:`;
             document.getElementById("stat-answered").textContent = `${answeredCount}/15`;
             document.getElementById("stat-score").textContent = `${scoreCount}`;
             document.getElementById("stat-graded").textContent = `${answeredCount}`;
         }
 
         function renderCurrentQuestion() {
-            const q = QUESTIONS[currentIndex];
-            const st = userState[q.id];
+            const questions = getActiveQuestions();
+            const q = questions[currentIndex];
+            const st = userState[currentTestId][q.id];
 
             // Header badges
-            document.getElementById("q-number-badge").textContent = `Question ${q.id} of 15`;
+            document.getElementById("q-number-badge").textContent = `Test ${currentTestId} • Question ${q.id} of 15`;
             const catBadge = document.getElementById("q-category-badge");
             catBadge.textContent = q.badge;
             if (q.category === "quiz") {
@@ -1386,19 +2404,20 @@
             // Prev / Next button states
             document.getElementById("btn-prev").disabled = currentIndex === 0;
             document.getElementById("btn-prev").style.opacity = currentIndex === 0 ? "0.4" : "1";
-            document.getElementById("btn-next").disabled = currentIndex === QUESTIONS.length - 1;
-            document.getElementById("btn-next").style.opacity = currentIndex === QUESTIONS.length - 1 ? "0.4" : "1";
+            document.getElementById("btn-next").disabled = currentIndex === questions.length - 1;
+            document.getElementById("btn-next").style.opacity = currentIndex === questions.length - 1 ? "0.4" : "1";
         }
 
         function renderAll() {
+            renderTestSwitcher();
             renderNavGrid();
             updateHeaderStats();
             renderCurrentQuestion();
         }
 
         function togglePartAOption(optIndex) {
-            const q = QUESTIONS[currentIndex];
-            const st = userState[q.id];
+            const q = getActiveQuestions()[currentIndex];
+            const st = userState[currentTestId][q.id];
             const pos = st.partA.indexOf(optIndex);
             if (pos >= 0) {
                 st.partA.splice(pos, 1);
@@ -1410,8 +2429,8 @@
         }
 
         function selectSufficient(val) {
-            const q = QUESTIONS[currentIndex];
-            const st = userState[q.id];
+            const q = getActiveQuestions()[currentIndex];
+            const st = userState[currentTestId][q.id];
             st.sufficient = val;
             if (val === false) {
                 st.theorem = "None";
@@ -1424,8 +2443,8 @@
         }
 
         function selectTheorem(thm) {
-            const q = QUESTIONS[currentIndex];
-            const st = userState[q.id];
+            const q = getActiveQuestions()[currentIndex];
+            const st = userState[currentTestId][q.id];
             st.theorem = thm;
             if (thm === "None") {
                 st.sufficient = false;
@@ -1438,15 +2457,15 @@
         }
 
         function handleStatementInput(val) {
-            const q = QUESTIONS[currentIndex];
-            const st = userState[q.id];
+            const q = getActiveQuestions()[currentIndex];
+            const st = userState[currentTestId][q.id];
             st.secondTri = val.toUpperCase().replace(/[^A-Z]/g, "").slice(0, 3);
             st.checked = false;
         }
 
         function tapVertex(letter) {
-            const q = QUESTIONS[currentIndex];
-            const st = userState[q.id];
+            const q = getActiveQuestions()[currentIndex];
+            const st = userState[currentTestId][q.id];
             if (st.sufficient === false || st.theorem === "None") return;
             if (st.secondTri.length < 3 && !st.secondTri.includes(letter)) {
                 st.secondTri += letter;
@@ -1456,16 +2475,16 @@
         }
 
         function clearStatementInput() {
-            const q = QUESTIONS[currentIndex];
-            const st = userState[q.id];
+            const q = getActiveQuestions()[currentIndex];
+            const st = userState[currentTestId][q.id];
             st.secondTri = "";
             st.checked = false;
             renderCurrentQuestion();
         }
 
         function checkCurrentQuestion() {
-            const q = QUESTIONS[currentIndex];
-            const st = userState[q.id];
+            const q = getActiveQuestions()[currentIndex];
+            const st = userState[currentTestId][q.id];
 
             // Grade Part A: Must select all correct options and no incorrect options
             const correctIndices = q.partAOptions
@@ -1506,7 +2525,8 @@
         }
 
         function nextQuestion() {
-            if (currentIndex < QUESTIONS.length - 1) {
+            const questions = getActiveQuestions();
+            if (currentIndex < questions.length - 1) {
                 currentIndex++;
                 renderAll();
             }
@@ -1540,10 +2560,14 @@
         }
 
         function renderWorksheetView() {
+            renderTestSwitcher();
             const showAnswers = document.getElementById("toggle-print-answers").checked;
             const container = document.getElementById("worksheet-questions-container");
+            const paperTitle = document.getElementById("worksheet-paper-title");
+            paperTitle.textContent = `${TEST_META[currentTestId].title} (15 Questions)`;
 
-            container.innerHTML = QUESTIONS.map(q => {
+            const questions = getActiveQuestions();
+            container.innerHTML = questions.map(q => {
                 const svgMarkup = GeometryRenderer.renderDiagram(q.diagram);
                 const correctParts = q.partAOptions
                     .filter(o => o.correct)
@@ -1598,11 +2622,21 @@
         }
 
         function openResetModal() {
+            document.getElementById("reset-modal-title").textContent = `Reset Test ${currentTestId} or All 3 Tests?`;
             document.getElementById("reset-modal").classList.remove("hidden");
         }
 
         function closeResetModal() {
             document.getElementById("reset-modal").classList.add("hidden");
+        }
+
+        function confirmResetCurrentTest() {
+            ALL_TESTS[currentTestId].forEach(q => {
+                userState[currentTestId][q.id] = createBlankQuestionState();
+            });
+            currentIndex = 0;
+            closeResetModal();
+            renderAll();
         }
 
         function confirmResetAll() {
