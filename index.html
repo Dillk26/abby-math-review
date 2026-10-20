@@ -1,0 +1,1622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aiden's Geometry Prep: Congruent Triangles (15-Question Quiz)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=STIX+Two+Math&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .math-font {
+            font-family: 'STIX Two Math', 'Cambria Math', 'Times New Roman', serif;
+        }
+        /* Custom scrollbar for question navigator */
+        .custom-scroll::-webkit-scrollbar {
+            height: 6px;
+            width: 6px;
+        }
+        .custom-scroll::-webkit-scrollbar-track {
+            background: #f1f5f9;
+            border-radius: 9999px;
+        }
+        .custom-scroll::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 9999px;
+        }
+        .custom-scroll::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+        /* Print Styles for Worksheet Mode */
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+            .print-only {
+                display: block !important;
+            }
+            body {
+                background: white !important;
+                color: black !important;
+            }
+            .print-card {
+                break-inside: avoid;
+                page-break-inside: avoid;
+                border-bottom: 1px solid #e2e8f0;
+                padding-bottom: 1rem;
+                margin-bottom: 1rem;
+            }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 min-h-screen flex flex-col">
+
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-30 shadow-sm no-print">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex flex-wrap items-center justify-between gap-3">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-indigo-600 text-white flex items-center justify-center font-bold text-lg shadow-sm">
+                    &Delta;&cong;
+                </div>
+                <div>
+                    <div class="flex items-center gap-2">
+                        <h1 class="text-lg sm:text-xl font-extrabold text-slate-900 tracking-tight">Geometry A: Congruent Triangles</h1>
+                        <span class="hidden sm:inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-indigo-50 text-indigo-700 border border-indigo-200">
+                            Aiden's 15-Question Prep Quiz
+                        </span>
+                    </div>
+                    <p class="text-xs text-slate-500">Practice Quiz 2 Format &bull; Parts (a) Corresponding Parts, (b) Sufficient Info, (c) Theorem &amp; Statement</p>
+                </div>
+            </div>
+
+            <!-- Action Controls & Live Score -->
+            <div class="flex items-center gap-2 sm:gap-3 flex-wrap">
+                <div class="bg-slate-100 rounded-xl px-3 py-1.5 flex items-center gap-3 text-xs sm:text-sm font-semibold border border-slate-200">
+                    <div>
+                        <span class="text-slate-500">Answered:</span>
+                        <span id="stat-answered" class="text-slate-900 font-bold">0/15</span>
+                    </div>
+                    <div class="h-4 w-px bg-slate-300"></div>
+                    <div>
+                        <span class="text-slate-500">Score:</span>
+                        <span id="stat-score" class="text-emerald-600 font-bold">0</span>
+                        <span class="text-slate-400">/</span>
+                        <span id="stat-graded" class="text-slate-600">0</span>
+                    </div>
+                </div>
+
+                <button id="btn-cheat-sheet" onclick="toggleCheatSheet()" class="px-3 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-amber-50 text-amber-800 border border-amber-200 hover:bg-amber-100 transition flex items-center gap-1.5">
+                    <svg class="w-4 h-4 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                    <span>Theorem Guide</span>
+                </button>
+
+                <button id="btn-view-mode" onclick="togglePrintView()" class="px-3 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-slate-100 text-slate-700 border border-slate-200 hover:bg-slate-200 transition flex items-center gap-1.5">
+                    <svg class="w-4 h-4 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
+                    <span id="view-mode-label">Worksheet View</span>
+                </button>
+
+                <button onclick="openResetModal()" class="px-3 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-rose-50 text-rose-700 border border-rose-200 hover:bg-rose-100 transition">
+                    Reset
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <section id="cheat-sheet-drawer" class="hidden bg-amber-50/80 border-b border-amber-200 no-print transition-all">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <div class="flex items-center justify-between mb-3">
+                <h2 class="text-sm font-bold text-amber-900 uppercase tracking-wider flex items-center gap-2">
+                    <span>Quick Study Guide: How to Solve Every Quiz Question</span>
+                </h2>
+                <button onclick="toggleCheatSheet()" class="text-amber-700 hover:text-amber-900 text-xs font-semibold">Close &times;</button>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs sm:text-sm">
+                <div class="bg-white p-3.5 rounded-xl border border-amber-200 shadow-sm">
+                    <div class="font-bold text-slate-900 mb-1">1. Look for "Hidden" Congruent Parts (Part a)</div>
+                    <ul class="space-y-1 text-slate-600 list-disc list-inside">
+                        <li><strong class="text-indigo-700">Reflexive Property:</strong> If two triangles share a side, that side is congruent to itself (e.g., <span class="math-font">NM &cong; MN</span>).</li>
+                        <li><strong class="text-indigo-700">Vertical Angles:</strong> If two triangles meet at a point in a "bowtie" X-shape, the opposite angles at the center are congruent!</li>
+                        <li><strong class="text-indigo-700">Given Marks:</strong> Match 1 tick with 1 tick, 2 ticks with 2 ticks, and matching angle arcs.</li>
+                    </ul>
+                </div>
+                <div class="bg-white p-3.5 rounded-xl border border-amber-200 shadow-sm">
+                    <div class="font-bold text-slate-900 mb-1">2. The 5 Valid Congruence Theorems (Parts b &amp; c)</div>
+                    <div class="grid grid-cols-2 gap-1.5 text-slate-700">
+                        <div><span class="font-bold text-emerald-700">SSS:</span> 3 pairs of sides</div>
+                        <div><span class="font-bold text-emerald-700">SAS:</span> 2 sides + <em>included</em> angle</div>
+                        <div><span class="font-bold text-emerald-700">ASA:</span> 2 angles + <em>included</em> side</div>
+                        <div><span class="font-bold text-emerald-700">AAS:</span> 2 angles + <em>non-included</em> side</div>
+                        <div class="col-span-2"><span class="font-bold text-emerald-700">HL:</span> <em>Right triangles only!</em> Hypotenuse + 1 Leg</div>
+                    </div>
+                </div>
+                <div class="bg-white p-3.5 rounded-xl border border-amber-200 shadow-sm">
+                    <div class="font-bold text-rose-800 mb-1">3. Watch Out for Traps &amp; Vertex Order!</div>
+                    <ul class="space-y-1 text-slate-600 list-disc list-inside">
+                        <li><strong class="text-rose-600">NO SSA (or ASS):</strong> 2 sides and a <em>non-included</em> angle is NOT enough info (unless it's a right triangle with HL).</li>
+                        <li><strong class="text-rose-600">NO AAA:</strong> 3 pairs of angles only proves similarity, not congruence.</li>
+                        <li><strong class="text-slate-800">Vertex Order Matters:</strong> In <span class="math-font">&Delta;ABC &cong; &Delta;DEF</span>, <span class="math-font">A</span> must match <span class="math-font">D</span>, <span class="math-font">B</span> must match <span class="math-font">E</span>, and <span class="math-font">C</span> must match <span class="math-font">F</span>!</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <main id="interactive-view" class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 no-print">
+        
+        <!-- Filter Tabs & Question Number Ribbon -->
+        <div class="bg-white rounded-2xl border border-slate-200 p-4 shadow-sm mb-6">
+            <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+                <div class="flex items-center gap-1.5 flex-wrap">
+                    <span class="text-xs font-bold uppercase tracking-wider text-slate-400 mr-1">Filter:</span>
+                    <button onclick="setFilter('all')" id="filter-all" class="px-3 py-1 rounded-lg text-xs font-semibold bg-indigo-600 text-white transition">All 15</button>
+                    <button onclick="setFilter('quiz')" id="filter-quiz" class="px-3 py-1 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition">From Your Quiz (#1–4)</button>
+                    <button onclick="setFilter('shared')" id="filter-shared" class="px-3 py-1 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition">Reflexive / Shared Side</button>
+                    <button onclick="setFilter('bowtie')" id="filter-bowtie" class="px-3 py-1 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition">Vertical Angles</button>
+                    <button onclick="setFilter('traps')" id="filter-traps" class="px-3 py-1 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition">Traps &amp; Right &Delta;s</button>
+                    <button onclick="setFilter('unanswered')" id="filter-unanswered" class="px-3 py-1 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition">Remaining</button>
+                </div>
+                <div class="flex items-center gap-3 text-xs text-slate-500">
+                    <span class="inline-flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span> Correct</span>
+                    <span class="inline-flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-rose-500"></span> Needs Review</span>
+                    <span class="inline-flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-indigo-600"></span> Current</span>
+                </div>
+            </div>
+
+            <!-- 40 Question Pills -->
+            <div id="question-nav-grid" class="flex items-center gap-1.5 overflow-x-auto pb-2 custom-scroll">
+                <!-- Populated dynamically via JS -->
+            </div>
+        </div>
+
+        <!-- Active Question Card -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+            
+            <!-- Left Column: Geometric Diagram & Directions (5 cols on lg) -->
+            <div class="lg:col-span-5 bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+                <div class="px-5 py-4 border-b border-slate-100 flex items-center justify-between bg-slate-50/60">
+                    <div class="flex items-center gap-2.5">
+                        <span id="q-number-badge" class="px-3 py-1 rounded-lg bg-indigo-600 text-white font-extrabold text-sm">
+                            Question 1
+                        </span>
+                        <span id="q-category-badge" class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-amber-100 text-amber-800">
+                            From Aiden's Quiz Sheet
+                        </span>
+                    </div>
+                    <button onclick="toggleHint()" class="text-xs font-semibold text-indigo-600 hover:text-indigo-800 flex items-center gap-1 px-2.5 py-1 rounded-lg hover:bg-indigo-50 transition">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
+                        <span>Hint</span>
+                    </button>
+                </div>
+
+                <!-- Quiz Directions Box -->
+                <div class="px-5 py-3 bg-slate-50 border-b border-slate-100 text-xs text-slate-600 space-y-1">
+                    <div><strong class="text-slate-800">a)</strong> State the corresponding parts that are congruent in the diagram.</div>
+                    <div><strong class="text-slate-800">b)</strong> Determine if there is sufficient information to state the two triangles are congruent.</div>
+                    <div><strong class="text-slate-800">c)</strong> If congruent, justify with an appropriate theorem and write a triangle congruence statement.</div>
+                </div>
+
+                <!-- SVG Canvas Container -->
+                <div class="p-4 flex flex-col items-center justify-center bg-white relative">
+                    <div id="svg-diagram-container" class="w-full max-w-[420px] aspect-[4/3] flex items-center justify-center bg-slate-50/50 rounded-xl border border-slate-200/80 p-2">
+                        <!-- Dynamic SVG rendered here -->
+                    </div>
+                    <p id="diagram-caption" class="text-xs text-slate-500 mt-2.5 text-center font-medium"></p>
+                </div>
+
+                <!-- Optional Hint Box -->
+                <div id="hint-box" class="hidden mx-5 mb-5 p-3.5 rounded-xl bg-indigo-50 border border-indigo-200 text-xs sm:text-sm text-indigo-950">
+                    <div class="font-bold text-indigo-800 mb-1 flex items-center gap-1.5">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        <span>Teacher's Hint:</span>
+                    </div>
+                    <p id="hint-text" class="text-indigo-900 leading-relaxed"></p>
+                </div>
+            </div>
+
+            <!-- Right Column: Parts a), b), and c) Interactive Worksheet (7 cols on lg) -->
+            <div class="lg:col-span-7 space-y-4">
+                
+                <!-- PART A: State the corresponding congruent parts -->
+                <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm">
+                    <div class="flex items-start justify-between gap-2 mb-3">
+                        <div>
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-bold bg-slate-900 text-white mr-2">Part a)</span>
+                            <h3 class="inline font-bold text-slate-900 text-sm sm:text-base">State all corresponding parts that are congruent</h3>
+                            <p class="text-xs text-slate-500 mt-1">Select every true congruency statement you can prove from the diagram (including Reflexive shared sides or Vertical Angles!).</p>
+                        </div>
+                        <span id="part-a-status" class="text-xs font-bold"></span>
+                    </div>
+
+                    <div id="part-a-options" class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 mt-3">
+                        <!-- Dynamically populated checkboxes -->
+                    </div>
+                </div>
+
+                <!-- PART B: Sufficient Information? (Yes or No) -->
+                <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm">
+                    <div class="flex items-start justify-between gap-2 mb-3">
+                        <div>
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-bold bg-slate-900 text-white mr-2">Part b)</span>
+                            <h3 class="inline font-bold text-slate-900 text-sm sm:text-base">Is there sufficient information to state the triangles are congruent?</h3>
+                        </div>
+                        <span id="part-b-status" class="text-xs font-bold"></span>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-3 mt-3">
+                        <button type="button" id="btn-suff-yes" onclick="selectSufficient(true)" class="py-3 px-4 rounded-xl border-2 border-slate-200 font-bold text-sm sm:text-base flex items-center justify-center gap-2 hover:border-indigo-300 transition">
+                            <span>Yes (Congruent)</span>
+                        </button>
+                        <button type="button" id="btn-suff-no" onclick="selectSufficient(false)" class="py-3 px-4 rounded-xl border-2 border-slate-200 font-bold text-sm sm:text-base flex items-center justify-center gap-2 hover:border-indigo-300 transition">
+                            <span>No (Not Enough Info)</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- PART C: Theorem & Triangle Congruence Statement -->
+                <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm">
+                    <div class="flex items-start justify-between gap-2 mb-3">
+                        <div>
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-bold bg-slate-900 text-white mr-2">Part c)</span>
+                            <h3 class="inline font-bold text-slate-900 text-sm sm:text-base">Justify with a Theorem &amp; Write the Congruence Statement</h3>
+                        </div>
+                        <span id="part-c-status" class="text-xs font-bold"></span>
+                    </div>
+
+                    <!-- Step c1: Choose Theorem -->
+                    <div class="mb-4">
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">1. Congruence Theorem / Postulate:</label>
+                        <div id="theorem-buttons" class="grid grid-cols-3 sm:grid-cols-6 gap-2">
+                            <!-- SSS, SAS, ASA, AAS, HL, None -->
+                        </div>
+                    </div>
+
+                    <!-- Step c2: Complete Triangle Congruence Statement -->
+                    <div id="congruence-statement-section" class="pt-3 border-t border-slate-100">
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">2. Triangle Congruence Statement (Match Vertex Order Carefully!):</label>
+                        <div class="flex flex-wrap items-center gap-3 bg-slate-50 p-3.5 rounded-xl border border-slate-200">
+                            <div class="text-lg sm:text-xl font-bold math-font tracking-wide text-slate-900 flex items-center gap-2">
+                                <span id="first-triangle-label">&Delta;XVW</span>
+                                <span class="text-indigo-600">&cong;</span>
+                                <span>&Delta;</span>
+                            </div>
+                            <input
+                                type="text"
+                                id="input-second-triangle"
+                                maxlength="3"
+                                placeholder="???"
+                                oninput="handleStatementInput(this.value)"
+                                class="w-24 text-center text-lg sm:text-xl font-bold math-font uppercase tracking-widest py-1.5 px-3 rounded-lg border-2 border-indigo-300 focus:border-indigo-600 focus:outline-none bg-white text-slate-900 shadow-inner"
+                            />
+                            <!-- Quick Tap Vertex Buttons for Mobile/Tablet -->
+                            <div class="flex items-center gap-1.5 ml-auto">
+                                <span class="text-xs text-slate-400 mr-1 hidden sm:inline">Tap vertices:</span>
+                                <div id="vertex-tap-buttons" class="flex items-center gap-1.5">
+                                    <!-- Populated dynamically -->
+                                </div>
+                                <button type="button" onclick="clearStatementInput()" class="px-2 py-1.5 rounded-lg text-xs font-semibold bg-slate-200 text-slate-700 hover:bg-slate-300 transition" title="Clear letters">
+                                    Clear
+                                </button>
+                            </div>
+                        </div>
+                        <p id="not-congruent-note" class="hidden text-xs text-amber-700 font-medium mt-2">
+                            Since you selected "No / Not Enough Info", no congruence statement is needed.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Feedback & Step-by-Step Solution Box (Shown after checking answer) -->
+                <div id="feedback-box" class="hidden rounded-2xl border p-5 shadow-sm transition-all">
+                    <!-- Populated when Check Answer is clicked -->
+                </div>
+
+                <!-- Bottom Action Bar (Check Answer, Prev, Next) -->
+                <div class="flex flex-wrap items-center justify-between gap-3 pt-1">
+                    <button type="button" onclick="prevQuestion()" id="btn-prev" class="px-4 py-2.5 rounded-xl font-semibold text-sm bg-white border border-slate-300 text-slate-700 hover:bg-slate-50 transition flex items-center gap-1.5 shadow-sm">
+                        <span>&larr; Previous</span>
+                    </button>
+
+                    <div class="flex items-center gap-2.5">
+                        <button type="button" onclick="checkCurrentQuestion()" id="btn-check" class="px-6 py-2.5 rounded-xl font-bold text-sm sm:text-base bg-indigo-600 text-white hover:bg-indigo-700 transition shadow-sm flex items-center gap-2">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            <span>Check My Answer</span>
+                        </button>
+                    </div>
+
+                    <button type="button" onclick="nextQuestion()" id="btn-next" class="px-4 py-2.5 rounded-xl font-semibold text-sm bg-white border border-slate-300 text-slate-700 hover:bg-slate-50 transition flex items-center gap-1.5 shadow-sm">
+                        <span>Next &rarr;</span>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <section id="worksheet-view" class="hidden max-w-6xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm mb-6 no-print flex flex-wrap items-center justify-between gap-4">
+            <div>
+                <h2 class="text-lg font-bold text-slate-900">Printable 15-Question Quiz &amp; Answer Key</h2>
+                <p class="text-xs sm:text-sm text-slate-600">Matches the exact layout of Aiden's Geometry A Practice Quiz 2 handout.</p>
+            </div>
+            <div class="flex items-center gap-3">
+                <label class="inline-flex items-center gap-2 text-sm font-semibold text-slate-700 cursor-pointer bg-slate-100 px-3 py-2 rounded-xl border border-slate-200">
+                    <input type="checkbox" id="toggle-print-answers" onchange="renderWorksheetView()" class="rounded text-indigo-600 focus:ring-indigo-500">
+                    <span>Show Full Answer Key</span>
+                </label>
+                <button onclick="window.print()" class="px-4 py-2 rounded-xl bg-indigo-600 text-white font-bold text-sm hover:bg-indigo-700 transition flex items-center gap-1.5">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
+                    <span>Print Worksheet</span>
+                </button>
+                <button onclick="togglePrintView()" class="px-4 py-2 rounded-xl bg-slate-100 text-slate-700 font-semibold text-sm hover:bg-slate-200 transition">
+                    Back to Interactive Test
+                </button>
+            </div>
+        </div>
+
+        <!-- Paper Worksheet Header -->
+        <div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm">
+            <div class="border-b-2 border-slate-900 pb-4 mb-6">
+                <div class="flex flex-wrap justify-between items-baseline gap-4 mb-2">
+                    <span class="font-serif font-bold text-lg">Geometry A</span>
+                    <div class="flex gap-6 text-sm font-serif">
+                        <span>Name___________________________________</span>
+                        <span>Date_________________</span>
+                        <span>Period_______</span>
+                    </div>
+                </div>
+                <h1 class="font-serif font-bold text-xl sm:text-2xl mb-2">Practice Quiz 2 - Congruent Triangles (15 Questions)</h1>
+                <div class="font-serif text-sm space-y-0.5 text-slate-800">
+                    <p><strong>a) State the corresponding parts that are congruent in each diagram.</strong></p>
+                    <p><strong>b) Determine if there is sufficient information to state the two triangles are congruent.</strong></p>
+                    <p><strong>c) If the triangles are congruent, justify your answer with an appropriate theorem and write a triangle congruence statement.</strong></p>
+                </div>
+            </div>
+
+            <div id="worksheet-questions-container" class="space-y-6">
+                <!-- Populated dynamically -->
+            </div>
+        </div>
+    </section>
+
+    <div id="reset-modal" class="hidden fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-xs flex items-center justify-center p-4 no-print">
+        <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-xl border border-slate-200">
+            <h3 class="text-lg font-bold text-slate-900 mb-2">Reset All 15 Questions?</h3>
+            <p class="text-sm text-slate-600 mb-5">This will clear Aiden's current answers and score so he can take the 15-question quiz fresh from the beginning.</p>
+            <div class="flex justify-end gap-3">
+                <button onclick="closeResetModal()" class="px-4 py-2 rounded-xl text-sm font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition">Cancel</button>
+                <button onclick="confirmResetAll()" class="px-4 py-2 rounded-xl text-sm font-bold bg-rose-600 text-white hover:bg-rose-700 transition">Yes, Reset Test</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        /**
+         * GEOMETRIC SVG ENGINE
+         * Draws crisp, accurate triangles with:
+         * - 1, 2, or 3 tick marks on congruent sides
+         * - 1, 2, or 3 arcs on congruent angles
+         * - Right-angle square boxes (90 deg)
+         * - Exterior bisector vertex labels that never overlap lines
+         */
+        const GeometryRenderer = {
+            // Vector utilities
+            sub(a, b) { return { x: a.x - b.x, y: a.y - b.y }; },
+            add(a, b) { return { x: a.x + b.x, y: a.y + b.y }; },
+            scale(v, s) { return { x: v.x * s, y: v.y * s }; },
+            len(v) { return Math.hypot(v.x, v.y); },
+            norm(v) {
+                const l = Math.hypot(v.x, v.y) || 1;
+                return { x: v.x / l, y: v.y / l };
+            },
+            mid(a, b) { return { x: (a.x + b.x) / 2, y: (a.y + b.y) / 2 }; },
+
+            // Draw 1, 2, or 3 tick marks on segment AB
+            drawTickMarks(A, B, count, color = "#1e293b") {
+                if (!count || count <= 0) return "";
+                const dir = this.norm(this.sub(B, A));
+                const perp = { x: -dir.y, y: dir.x };
+                const center = this.mid(A, B);
+                const spacing = 5.5;
+                const halfLen = 6.5;
+                let svg = "";
+
+                for (let i = 0; i < count; i++) {
+                    const offset = (i - (count - 1) / 2) * spacing;
+                    const pCenter = this.add(center, this.scale(dir, offset));
+                    const p1 = this.add(pCenter, this.scale(perp, -halfLen));
+                    const p2 = this.add(pCenter, this.scale(perp, halfLen));
+                    svg += `<line x1="${p1.x.toFixed(1)}" y1="${p1.y.toFixed(1)}" x2="${p2.x.toFixed(1)}" y2="${p2.y.toFixed(1)}" stroke="${color}" stroke-width="2" stroke-linecap="round" />`;
+                }
+                return svg;
+            },
+
+            // Draw 1, 2, or 3 angle arcs at vertex V between rays VA and VC
+            drawAngleArcs(V, A, C, count, color = "#334155") {
+                if (!count || count <= 0) return "";
+                const uA = this.norm(this.sub(A, V));
+                const uC = this.norm(this.sub(C, V));
+
+                let angA = Math.atan2(uA.y, uA.x);
+                let angC = Math.atan2(uC.y, uC.x);
+
+                // Compute shortest positive sweep from start angle to end angle
+                let diff = angC - angA;
+                while (diff <= -Math.PI) diff += 2 * Math.PI;
+                while (diff > Math.PI) diff -= 2 * Math.PI;
+
+                const sweepFlag = diff >= 0 ? 1 : 0;
+                let svg = "";
+
+                for (let i = 0; i < count; i++) {
+                    const r = 19 + i * 5;
+                    const start = this.add(V, this.scale(uA, r));
+                    const end = this.add(V, this.scale(uC, r));
+                    svg += `<path d="M ${start.x.toFixed(1)} ${start.y.toFixed(1)} A ${r} ${r} 0 0 ${sweepFlag} ${end.x.toFixed(1)} ${end.y.toFixed(1)}" fill="none" stroke="${color}" stroke-width="1.75" />`;
+                }
+                return svg;
+            },
+
+            // Draw right-angle square box at vertex V between rays VA and VC
+            drawRightAngle(V, A, C, color = "#334155") {
+                const uA = this.norm(this.sub(A, V));
+                const uC = this.norm(this.sub(C, V));
+                const s = 13;
+                const pA = this.add(V, this.scale(uA, s));
+                const pC = this.add(V, this.scale(uC, s));
+                const pCorner = this.add(pA, this.scale(uC, s));
+                return `<polyline points="${pA.x.toFixed(1)},${pA.y.toFixed(1)} ${pCorner.x.toFixed(1)},${pCorner.y.toFixed(1)} ${pC.x.toFixed(1)},${pC.y.toFixed(1)}" fill="none" stroke="${color}" stroke-width="1.75" />`;
+            },
+
+            // Compute smart exterior label position for vertex V with neighbors A, C
+            drawVertexLabel(V, neighbors, label, customOffset = null) {
+                let pushDir = { x: 0, y: 0 };
+                neighbors.forEach(N => {
+                    const u = this.norm(this.sub(N, V));
+                    pushDir.x += u.x;
+                    pushDir.y += u.y;
+                });
+                let outDir = this.norm({ x: -pushDir.x, y: -pushDir.y });
+                if (this.len(pushDir) < 0.05) {
+                    outDir = { x: 0, y: -1 };
+                }
+                const dist = 17;
+                const pos = customOffset
+                    ? { x: V.x + customOffset.dx, y: V.y + customOffset.dy }
+                    : this.add(V, this.scale(outDir, dist));
+
+                return `<text x="${pos.x.toFixed(1)}" y="${pos.y.toFixed(1)}" text-anchor="middle" dominant-baseline="central" font-family="'STIX Two Math', 'Times New Roman', serif" font-style="italic" font-weight="700" font-size="16" fill="#0f172a">${label}</text>`;
+            },
+
+            // Main render function for a diagram config
+            renderDiagram(config) {
+                const { points, triangles, ticks = [], arcs = [], rightAngles = [], labelOffsets = {} } = config;
+                let svgContent = "";
+
+                // 1. Draw triangle fills and outlines
+                triangles.forEach((tri, idx) => {
+                    const p0 = points[tri[0]];
+                    const p1 = points[tri[1]];
+                    const p2 = points[tri[2]];
+                    const fill = idx === 0 ? "rgba(79, 70, 229, 0.04)" : "rgba(16, 185, 129, 0.04)";
+                    svgContent += `<polygon points="${p0.x},${p0.y} ${p1.x},${p1.y} ${p2.x},${p2.y}" fill="${fill}" stroke="#1e293b" stroke-width="2.2" stroke-linejoin="round" />`;
+                });
+
+                // 2. Draw right angle boxes
+                rightAngles.forEach(ra => {
+                    const V = points[ra.vertex];
+                    const A = points[ra.ray1];
+                    const C = points[ra.ray2];
+                    svgContent += this.drawRightAngle(V, A, C, "#0f172a");
+                });
+
+                // 3. Draw angle arcs
+                arcs.forEach(arc => {
+                    const V = points[arc.vertex];
+                    const A = points[arc.ray1];
+                    const C = points[arc.ray2];
+                    svgContent += this.drawAngleArcs(V, A, C, arc.count, "#1e293b");
+                });
+
+                // 4. Draw segment tick marks
+                ticks.forEach(t => {
+                    const A = points[t.from];
+                    const B = points[t.to];
+                    svgContent += this.drawTickMarks(A, B, t.count, "#0f172a");
+                });
+
+                // 5. Draw vertex labels
+                const neighborMap = {};
+                Object.keys(points).forEach(k => { neighborMap[k] = []; });
+                triangles.forEach(tri => {
+                    const [a, b, c] = tri;
+                    neighborMap[a].push(points[b], points[c]);
+                    neighborMap[b].push(points[a], points[c]);
+                    neighborMap[c].push(points[a], points[b]);
+                });
+
+                Object.keys(points).forEach(k => {
+                    svgContent += this.drawVertexLabel(points[k], neighborMap[k], k, labelOffsets[k] || null);
+                });
+
+                return `<svg viewBox="0 0 380 250" class="w-full h-full select-none overflow-visible">${svgContent}</svg>`;
+            }
+        };
+
+        function buildTemplate(type, labels, marks) {
+            // labels is an array of vertex names mapped to template slots
+            const L = (i) => labels[i];
+            let points = {};
+            let triangles = [];
+            let labelOffsets = {};
+
+            if (type === "quiz1_collinear") {
+                // Exactly matches Question 1 on Aiden's Quiz: X-V-R along bottom, W above V, Q above R
+                // Slots: [0:X, 1:V, 2:W, 3:Q, 4:R]
+                points[L(0)] = { x: 55, y: 205 };
+                points[L(1)] = { x: 185, y: 205 };
+                points[L(2)] = { x: 185, y: 55 };
+                points[L(3)] = { x: 315, y: 55 };
+                points[L(4)] = { x: 315, y: 205 };
+                triangles = [[L(0), L(1), L(2)], [L(1), L(3), L(4)]];
+                labelOffsets[L(1)] = { dx: 0, dy: 20 };
+            } else if (type === "quiz2_shared_diag") {
+                // Exactly matches Question 2 on Aiden's Quiz: N-M horizontal-ish middle, D top-right, L bottom-left
+                // Slots: [0:D, 1:N, 2:M, 3:L]
+                points[L(0)] = { x: 265, y: 38 };
+                points[L(1)] = { x: 105, y: 122 };
+                points[L(2)] = { x: 275, y: 132 };
+                points[L(3)] = { x: 112, y: 218 };
+                triangles = [[L(0), L(1), L(2)], [L(3), L(2), L(1)]];
+                labelOffsets[L(1)] = { dx: -18, dy: -4 };
+                labelOffsets[L(2)] = { dx: 18, dy: 4 };
+            } else if (type === "quiz3_bowtie_vert") {
+                // Exactly matches Question 3 on Aiden's Quiz: Top Q-P, Center R, Bottom Y-X
+                // Slots: [0:Q, 1:P, 2:R, 3:X, 4:Y] (Q-R-X is one line, P-R-Y is the other line)
+                points[L(0)] = { x: 110, y: 45 };
+                points[L(1)] = { x: 280, y: 45 };
+                points[L(2)] = { x: 185, y: 125 };
+                points[L(3)] = { x: 260, y: 205 };
+                points[L(4)] = { x: 90, y: 205 };
+                triangles = [[L(0), L(2), L(1)], [L(3), L(2), L(4)]];
+                labelOffsets[L(2)] = { dx: -20, dy: 2 };
+            } else if (type === "quiz4_detached_inv") {
+                // Exactly matches Question 4 on Aiden's Quiz: Left triangle K-I top, J bottom; Right D top, E-C bottom
+                // Slots: [0:K, 1:I, 2:J, 3:D, 4:E, 5:C]
+                points[L(0)] = { x: 45, y: 55 };
+                points[L(1)] = { x: 165, y: 55 };
+                points[L(2)] = { x: 105, y: 200 };
+                points[L(3)] = { x: 275, y: 55 };
+                points[L(4)] = { x: 215, y: 200 };
+                points[L(5)] = { x: 335, y: 200 };
+                triangles = [[L(0), L(1), L(2)], [L(3), L(4), L(5)]];
+            } else if (type === "detached_standard") {
+                // Two side-by-side triangles: Left [0:A, 1:B, 2:C], Right [3:D, 4:E, 5:F]
+                // A=top, B=bottom-left, C=bottom-right
+                points[L(0)] = { x: 95, y: 50 };
+                points[L(1)] = { x: 35, y: 195 };
+                points[L(2)] = { x: 165, y: 195 };
+                points[L(3)] = { x: 285, y: 50 };
+                points[L(4)] = { x: 215, y: 195 };
+                points[L(5)] = { x: 345, y: 195 };
+                triangles = [[L(0), L(1), L(2)], [L(3), L(4), L(5)]];
+            } else if (type === "detached_right") {
+                // Two side-by-side Right Triangles:
+                // Left: [0:TopLeft, 1:BottomLeft(90°), 2:BottomRight]
+                // Right: [3:TopRight, 4:BottomRight(90°), 5:BottomLeft] (reflected)
+                points[L(0)] = { x: 45, y: 50 };
+                points[L(1)] = { x: 45, y: 195 };
+                points[L(2)] = { x: 165, y: 195 };
+                points[L(3)] = { x: 335, y: 50 };
+                points[L(4)] = { x: 335, y: 195 };
+                points[L(5)] = { x: 215, y: 195 };
+                triangles = [[L(0), L(1), L(2)], [L(3), L(4), L(5)]];
+            } else if (type === "shared_vertical_bisector") {
+                // Isosceles/Tent shape split down the middle by vertical segment [0:Top, 1:BottomMid]
+                // Left vertex = 2, Right vertex = 3
+                // Triangles: [0, 1, 2] and [0, 1, 3]
+                points[L(0)] = { x: 190, y: 40 };
+                points[L(1)] = { x: 190, y: 200 };
+                points[L(2)] = { x: 65, y: 200 };
+                points[L(3)] = { x: 315, y: 200 };
+                triangles = [[L(0), L(1), L(2)], [L(0), L(1), L(3)]];
+                labelOffsets[L(0)] = { dx: 0, dy: -16 };
+                labelOffsets[L(1)] = { dx: 0, dy: 18 };
+            } else if (type === "shared_kite_horiz") {
+                // Horizontal kite: shared horizontal axis [0:Left, 1:Right], [2:Top], [3:Bottom]
+                points[L(0)] = { x: 60, y: 125 };
+                points[L(1)] = { x: 320, y: 125 };
+                points[L(2)] = { x: 215, y: 40 };
+                points[L(3)] = { x: 215, y: 210 };
+                triangles = [[L(0), L(2), L(1)], [L(0), L(3), L(1)]];
+                labelOffsets[L(0)] = { dx: -18, dy: 0 };
+                labelOffsets[L(1)] = { dx: 18, dy: 0 };
+            } else if (type === "shared_parallelogram") {
+                // Parallelogram split by diagonal [0:TopLeft, 2:BottomRight]
+                // [0:TopLeft, 1:TopRight, 2:BottomRight, 3:BottomLeft]
+                points[L(0)] = { x: 95, y: 55 };
+                points[L(1)] = { x: 315, y: 55 };
+                points[L(2)] = { x: 285, y: 195 };
+                points[L(3)] = { x: 65, y: 195 };
+                triangles = [[L(0), L(1), L(2)], [L(2), L(3), L(0)]];
+                labelOffsets[L(0)] = { dx: -16, dy: -10 };
+                labelOffsets[L(2)] = { dx: 16, dy: 10 };
+            } else if (type === "shared_rectangle") {
+                // True rectangle split by diagonal [0:TopLeft, 2:BottomRight]
+                // [0:TopLeft, 1:TopRight(90°), 2:BottomRight, 3:BottomLeft(90°)]
+                points[L(0)] = { x: 75, y: 55 };
+                points[L(1)] = { x: 305, y: 55 };
+                points[L(2)] = { x: 305, y: 195 };
+                points[L(3)] = { x: 75, y: 195 };
+                triangles = [[L(0), L(1), L(2)], [L(2), L(3), L(0)]];
+                labelOffsets[L(0)] = { dx: -16, dy: -10 };
+                labelOffsets[L(2)] = { dx: 16, dy: 10 };
+            } else if (type === "bowtie_horiz") {
+                // Horizontal Hourglass/Bowtie: Center=0, LeftTop=1, LeftBot=2, RightBot=3, RightTop=4
+                // Line 1-0-3 and Line 2-0-4 intersect at 0
+                points[L(0)] = { x: 190, y: 125 };
+                points[L(1)] = { x: 65, y: 50 };
+                points[L(2)] = { x: 65, y: 200 };
+                points[L(3)] = { x: 315, y: 200 };
+                points[L(4)] = { x: 315, y: 50 };
+                triangles = [[L(1), L(2), L(0)], [L(3), L(4), L(0)]];
+                labelOffsets[L(0)] = { dx: 0, dy: -20 };
+            }
+
+            return {
+                points,
+                triangles,
+                ticks: marks.ticks || [],
+                arcs: marks.arcs || [],
+                rightAngles: marks.rightAngles || [],
+                labelOffsets
+            };
+        }
+
+        const QUESTIONS = [
+            // =========================================================================
+            // QUESTIONS 1 - 4: EXACT PROBLEMS FROM AIDEN'S PRACTICE QUIZ 2 HANDOUT
+            // =========================================================================
+            {
+                id: 1,
+                category: "quiz",
+                badge: "From Your Quiz (#1)",
+                caption: "Collinear base X–V–R with two given angle pairs and one pair of base segments.",
+                diagram: buildTemplate("quiz1_collinear", ["X", "V", "W", "Q", "R"], {
+                    ticks: [
+                        { from: "X", to: "V", count: 1 },
+                        { from: "V", to: "R", count: 1 }
+                    ],
+                    arcs: [
+                        { vertex: "X", ray1: "W", ray2: "V", count: 1 },
+                        { vertex: "V", ray1: "Q", ray2: "R", count: 1 },
+                        { vertex: "W", ray1: "X", ray2: "V", count: 2 },
+                        { vertex: "Q", ray1: "V", ray2: "R", count: 2 }
+                    ]
+                }),
+                partAOptions: [
+                    { text: "∠X ≅ ∠QVR (Given 1-arc angles)", correct: true },
+                    { text: "∠W ≅ ∠Q (Given 2-arc angles)", correct: true },
+                    { text: "XV ≅ VR (Given 1-tick sides)", correct: true },
+                    { text: "WV ≅ QR (Assumed without marks)", correct: false }
+                ],
+                sufficient: true,
+                theorem: "AAS",
+                firstTri: "XVW",
+                secondTri: "VQR",
+                vertexChoices: ["V", "Q", "R"],
+                hint: "Look at ΔXVW: you know two angles (∠X and ∠W) and side XV. Since side XV is NOT between ∠X and ∠W, which theorem uses 2 angles and a non-included side?",
+                explanation: "In ΔXVW and ΔVQR, we are given two pairs of congruent angles (∠X ≅ ∠QVR and ∠W ≅ ∠Q) and a non-included side (XV ≅ VR) opposite the 2-arc angle. By AAS, ΔXVW ≅ ΔVQR."
+            },
+            {
+                id: 2,
+                category: "quiz",
+                badge: "From Your Quiz (#2)",
+                caption: "Two triangles sharing center segment NM.",
+                diagram: buildTemplate("quiz2_shared_diag", ["D", "N", "M", "L"], {
+                    ticks: [
+                        { from: "D", to: "N", count: 2 },
+                        { from: "L", to: "M", count: 2 }
+                    ],
+                    arcs: [
+                        { vertex: "N", ray1: "D", ray2: "M", count: 1 },
+                        { vertex: "M", ray1: "L", ray2: "N", count: 1 }
+                    ]
+                }),
+                partAOptions: [
+                    { text: "DN ≅ LM (Given 2-tick sides)", correct: true },
+                    { text: "∠DNM ≅ ∠LMN (Given 1-arc angles)", correct: true },
+                    { text: "NM ≅ MN (Reflexive Property — shared side)", correct: true },
+                    { text: "DM ≅ LN (Not marked)", correct: false }
+                ],
+                sufficient: true,
+                theorem: "SAS",
+                firstTri: "DNM",
+                secondTri: "LMN",
+                vertexChoices: ["L", "M", "N"],
+                hint: "Notice that both triangles share side NM! By the Reflexive Property, NM ≅ MN. Where is the marked angle located relative to the two sides?",
+                explanation: "We have DN ≅ LM (given), ∠DNM ≅ ∠LMN (given), and shared side NM ≅ MN (Reflexive Property). Because the angle is included between the two sides, ΔDNM ≅ ΔLMN by SAS."
+            },
+            {
+                id: 3,
+                category: "quiz",
+                badge: "From Your Quiz (#3)",
+                caption: "Intersecting lines QM–X and P–Y forming vertical angles at R.",
+                diagram: buildTemplate("quiz3_bowtie_vert", ["Q", "P", "R", "X", "Y"], {
+                    ticks: [
+                        { from: "Q", to: "R", count: 1 },
+                        { from: "X", to: "R", count: 1 }
+                    ],
+                    arcs: [
+                        { vertex: "Q", ray1: "P", ray2: "R", count: 2 },
+                        { vertex: "X", ray1: "Y", ray2: "R", count: 2 },
+                        { vertex: "R", ray1: "Q", ray2: "P", count: 1 },
+                        { vertex: "R", ray1: "X", ray2: "Y", count: 1 }
+                    ]
+                }),
+                partAOptions: [
+                    { text: "∠Q ≅ ∠X (Given 2-arc angles)", correct: true },
+                    { text: "QR ≅ XR (Given 1-tick sides)", correct: true },
+                    { text: "∠QRP ≅ ∠XRY (Vertical Angles)", correct: true },
+                    { text: "QP ≅ XY (Not given)", correct: false }
+                ],
+                sufficient: true,
+                theorem: "ASA",
+                firstTri: "QRP",
+                secondTri: "XRY",
+                vertexChoices: ["X", "R", "Y"],
+                hint: "Look at side QR: it sits directly between ∠Q (2 arcs) and ∠QRP (1 arc at the center). Which theorem uses two angles and the included side?",
+                explanation: "We have ∠Q ≅ ∠X, included side QR ≅ XR, and vertical angles ∠QRP ≅ ∠XRY. Therefore, by ASA, ΔQRP ≅ ΔXRY."
+            },
+            {
+                id: 4,
+                category: "quiz",
+                badge: "From Your Quiz (#4)",
+                caption: "Two separate triangles with three pairs of marked sides.",
+                diagram: buildTemplate("quiz4_detached_inv", ["K", "I", "J", "D", "E", "C"], {
+                    ticks: [
+                        { from: "K", to: "J", count: 1 },
+                        { from: "D", to: "C", count: 1 },
+                        { from: "K", to: "I", count: 2 },
+                        { from: "E", to: "C", count: 2 },
+                        { from: "I", to: "J", count: 3 },
+                        { from: "E", to: "D", count: 3 }
+                    ]
+                }),
+                partAOptions: [
+                    { text: "KJ ≅ CD (Given 1-tick sides)", correct: true },
+                    { text: "KI ≅ CE (Given 2-tick sides)", correct: true },
+                    { text: "IJ ≅ ED (Given 3-tick sides)", correct: true },
+                    { text: "∠K ≅ ∠D (Not right or marked)", correct: false }
+                ],
+                sufficient: true,
+                theorem: "SSS",
+                firstTri: "KIJ",
+                secondTri: "CED",
+                vertexChoices: ["C", "E", "D"],
+                hint: "All three pairs of sides are marked with 1, 2, and 3 ticks! Match the vertices carefully: K is between the 1-tick and 2-tick sides. Which vertex on the right is between the 1-tick and 2-tick sides?",
+                explanation: "All three corresponding sides are congruent (KJ ≅ CD, KI ≅ CE, IJ ≅ ED), so the triangles are congruent by SSS. Matching vertices: K (between 1 & 2 ticks) matches C; I (between 2 & 3 ticks) matches E; J (between 1 & 3 ticks) matches D. Thus ΔKIJ ≅ ΔCED."
+            },
+
+            // =========================================================================
+            // QUESTIONS 5 - 12: DETACHED TRIANGLES (SSS, SAS, ASA, AAS, HL, TRAPS)
+            // =========================================================================
+            {
+                id: 5,
+                category: "detached",
+                badge: "Detached Triangles",
+                caption: "Two triangles with two pairs of congruent sides and an included angle.",
+                diagram: buildTemplate("detached_standard", ["A", "B", "C", "D", "E", "F"], {
+                    ticks: [
+                        { from: "A", to: "B", count: 1 },
+                        { from: "D", to: "E", count: 1 },
+                        { from: "B", to: "C", count: 2 },
+                        { from: "E", to: "F", count: 2 }
+                    ],
+                    arcs: [
+                        { vertex: "B", ray1: "A", ray2: "C", count: 1 },
+                        { vertex: "E", ray1: "D", ray2: "F", count: 1 }
+                    ]
+                }),
+                partAOptions: [
+                    { text: "AB ≅ DE (Given 1-tick sides)", correct: true },
+                    { text: "∠B ≅ ∠E (Given 1-arc angles)", correct: true },
+                    { text: "BC ≅ EF (Given 2-tick sides)", correct: true },
+                    { text: "AC ≅ DF (Not given)", correct: false }
+                ],
+                sufficient: true,
+                theorem: "SAS",
+                firstTri: "ABC",
+                secondTri: "DEF",
+                vertexChoices: ["D", "E", "F"],
+                hint: "Angle B is directly between side AB (1 tick) and side BC (2 ticks).",
+                explanation: "Two sides and the included angle of ΔABC are congruent to two sides and the included angle of ΔDEF (AB ≅ DE, ∠B ≅ ∠E, BC ≅ EF). By SAS, ΔABC ≅ ΔDEF."
+            },
+            {
+                id: 6,
+                category: "detached",
+                badge: "Detached Triangles",
+                caption: "Two triangles with two angles and the side between them marked.",
+                diagram: buildTemplate("detached_standard", ["G", "H", "J", "M", "N", "P"], {
+                    ticks: [
+                        { from: "H", to: "J", count: 1 },
+                        { from: "N", to: "P", count: 1 }
+                    ],
+                    arcs: [
+                        { vertex: "H", ray1: "G", ray2: "J", count: 1 },
+                        { vertex: "N", ray1: "M", ray2: "P", count: 1 },
+                        { vertex: "J", ray1: "G", ray2: "H", count: 2 },
+                        { vertex: "P", ray1: "M", ray2: "N", count: 2 }
+                    ]
+                }),
+                partAOptions: [
+                    { text: "∠H ≅ ∠N (Given 1-arc angles)", correct: true },
+                    { text: "HJ ≅ NP (Given 1-tick sides)", correct: true },
+                    { text: "∠J ≅ ∠P (Given 2-arc angles)", correct: true },
+                    { text: "GH ≅ MN (Not given)", correct: false }
+                ],
+                sufficient: true,
+                theorem: "ASA",
+                firstTri: "GHJ",
+                secondTri: "MNP",
+                vertexChoices: ["M", "N", "P"],
+                hint: "Look at the marked side HJ: both ∠H and ∠J touch side HJ!",
+                explanation: "We have two angles and the included side congruent: ∠H ≅ ∠N, HJ ≅ NP, and ∠J ≅ ∠P. By ASA, ΔGHJ ≅ ΔMNP."
+            },
+            {
+                id: 7,
+                category: "traps",
+                badge: "Trap Check!",
+                caption: "Carefully check the position of the angle relative to the two marked sides.",
+                diagram: buildTemplate("detached_standard", ["R", "S", "T", "U", "V", "W"], {
+                    ticks: [
+                        { from: "R", to: "S", count: 1 },
+                        { from: "U", to: "V", count: 1 },
+                        { from: "R", to: "T", count: 2 },
+                        { from: "U", to: "W", count: 2 }
+                    ],
+                    arcs: [
+                        { vertex: "S", ray1: "R", ray2: "T", count: 1 },
+                        { vertex: "V", ray1: "U", ray2: "W", count: 1 }
+                    ]
+                }),
+                partAOptions: [
+                    { text: "RS ≅ UV (Given 1-tick sides)", correct: true },
+                    { text: "RT ≅ UW (Given 2-tick sides)", correct: true },
+                    { text: "∠S ≅ ∠V (Given 1-arc angles)", correct: true },
+                    { text: "∠R ≅ ∠U (Included angle not given)", correct: false }
+                ],
+                sufficient: false,
+                theorem: "None",
+                firstTri: "RST",
+                secondTri: "",
+                vertexChoices: ["U", "V", "W"],
+                hint: "In ΔRST, the marked sides are RS and RT (which meet at R), but the marked angle is at S! Is SSA a valid congruence theorem?",
+                explanation: "The given parts form Side-Side-Angle (SSA), where the angle (∠S) is NOT included between the two marked sides (RS and RT). SSA is NOT sufficient to prove triangles congruent!"
+            },
+            {
+                id: 8,
+                category: "traps",
+                badge: "Right Triangles",
+                caption: "Two right triangles with hypotenuse and one leg marked congruent.",
+                diagram: buildTemplate("detached_right", ["A", "B", "C", "D", "E", "F"], {
+                    rightAngles: [
+                        { vertex: "B", ray1: "A", ray2: "C" },
+                        { vertex: "E", ray1: "D", ray2: "F" }
+                    ],
+                    ticks: [
+                        { from: "A", to: "B", count: 1 },
+                        { from: "D", to: "E", count: 1 },
+                        { from: "A", to: "C", count: 2 },
+                        { from: "D", to: "F", count: 2 }
+                    ]
+                }),
+                partAOptions: [
+                    { text: "∠B and ∠E are right angles (90°)", correct: true },
+                    { text: "AB ≅ DE (Given 1-tick legs)", correct: true },
+                    { text: "AC ≅ DF (Given 2-tick hypotenuses)", correct: true },
+                    { text: "BC ≅ EF (Not directly marked)", correct: false }
+                ],
+                sufficient: true,
+                theorem: "HL",
+                firstTri: "ABC",
+                secondTri: "DEF",
+                vertexChoices: ["D", "E", "F"],
+                hint: "Normally SSA doesn't work, EXCEPT in a right triangle when you have the Hypotenuse (2 ticks) and a Leg (1 tick)!",
+                explanation: "Both ΔABC and ΔDEF are right triangles, and they have congruent hypotenuses (AC ≅ DF) and one pair of congruent legs (AB ≅ DE). By the Hypotenuse-Leg (HL) theorem, ΔABC ≅ ΔDEF."
+            },
+            {
+                id: 9,
+                category: "traps",
+                badge: "Right Triangles",
+                caption: "Two right triangles with two pairs of legs marked congruent.",
+                diagram: buildTemplate("detached_right", ["J", "K", "L", "M", "N", "P"], {
+                    rightAngles: [
+                        { vertex: "K", ray1: "J", ray2: "L" },
+                        { vertex: "N", ray1: "M", ray2: "P" }
+                    ],
+                    ticks: [
+                        { from: "J", to: "K", count: 1 },
+                        { from: "M", to: "N", count: 1 },
+                        { from: "K", to: "L", count: 2 },
+                        { from: "N", to: "P", count: 2 }
+                    ]
+                }),
+                partAOptions: [
+                    { text: "JK ≅ MN (Given 1-tick legs)", correct: true },
+                    { text: "∠K ≅ ∠N (Right angles are congruent)", correct: true },
+                    { text: "KL ≅ NP (Given 2-tick legs)", correct: true },
+                    { text: "JL ≅ MP (Hypotenuses are not marked)", correct: false }
+                ],
+                sufficient: true,
+                theorem: "SAS",
+                firstTri: "JKL",
+                secondTri: "MNP",
+                vertexChoices: ["M", "N", "P"],
+                hint: "Be careful! Even though these are right triangles, is the hypotenuse marked? Or do we have the two legs and the 90° angle between them?",
+                explanation: "Although these are right triangles, the hypotenuses (JL and MP) are NOT marked. Instead, we are given both legs and the included 90° right angle between them (JK ≅ MN, ∠K ≅ ∠N, KL ≅ NP). That is SAS, so ΔJKL ≅ ΔMNP!"
+            },
+            {
+                id: 10,
+                category: "shared",
+                badge: "Reflexive Shared Side",
+                caption: "Triangle split by vertical segment AB down the middle.",
+                diagram: buildTemplate("shared_vertical_bisector", ["A", "B", "C", "D"], {
+                    ticks: [
+                        { from: "A", to: "C", count: 1 },
+                        { from: "A", to: "D", count: 1 },
+                        { from: "B", to: "C", count: 2 },
+                        { from: "B", to: "D", count: 2 }
+                    ]
+                }),
+                partAOptions: [
+                    { text: "AC ≅ AD (Given 1-tick sides)", correct: true },
+                    { text: "BC ≅ BD (Given 2-tick sides)", correct: true },
+                    { text: "AB ≅ AB (Reflexive Property — shared side)", correct: true },
+                    { text: "∠C ≅ ∠D (Not marked as given)", correct: false }
+                ],
+                sufficient: true,
+                theorem: "SSS",
+                firstTri: "ABC",
+                secondTri: "ABD",
+                vertexChoices: ["A", "B", "D"],
+                hint: "You have 2 pairs of marked sides, plus both triangles share the center vertical segment AB!",
+                explanation: "We have AC ≅ AD (given), BC ≅ BD (given), and AB ≅ AB by the Reflexive Property. With all three pairs of sides congruent, ΔABC ≅ ΔABD by SSS."
+            },
+            {
+                id: 11,
+                category: "shared",
+                badge: "Reflexive Shared Side",
+                caption: "Kite WXYZ sharing horizontal diagonal WY.",
+                diagram: buildTemplate("shared_kite_horiz", ["W", "Y", "X", "Z"], {
+                    arcs: [
+                        { vertex: "W", ray1: "X", ray2: "Y", count: 1 },
+                        { vertex: "W", ray1: "Z", ray2: "Y", count: 1 },
+                        { vertex: "Y", ray1: "X", ray2: "W", count: 2 },
+                        { vertex: "Y", ray1: "Z", ray2: "W", count: 2 }
+                    ]
+                }),
+                partAOptions: [
+                    { text: "∠XWY ≅ ∠ZWY (Given 1-arc angles)", correct: true },
+                    { text: "∠XYW ≅ ∠ZYW (Given 2-arc angles)", correct: true },
+                    { text: "WY ≅ WY (Reflexive Property — shared side)", correct: true },
+                    { text: "WX ≅ WZ (Not marked)", correct: false }
+                ],
+                sufficient: true,
+                theorem: "ASA",
+                firstTri: "WXY",
+                secondTri: "WZY",
+                vertexChoices: ["W", "Z", "Y"],
+                hint: "Shared side WY connects vertex W (where the 1-arc angles are) and vertex Y (where the 2-arc angles are).",
+                explanation: "We have ∠XWY ≅ ∠ZWY, included shared side WY ≅ WY (Reflexive Property), and ∠XYW ≅ ∠ZYW. By ASA, ΔWXY ≅ ΔWZY."
+            },
+            {
+                id: 12,
+                category: "shared",
+                badge: "Reflexive Trap!",
+                caption: "Check carefully whether the given angle is included between the marked side and the shared side!",
+                diagram: buildTemplate("shared_parallelogram", ["J", "K", "L", "M"], {
+                    ticks: [
+                        { from: "J", to: "K", count: 1 },
+                        { from: "L", to: "M", count: 1 }
+                    ],
+                    arcs: [
+                        { vertex: "L", ray1: "K", ray2: "J", count: 1 },
+                        { vertex: "J", ray1: "M", ray2: "L", count: 1 }
+                    ]
+                }),
+                partAOptions: [
+                    { text: "JK ≅ LM (Given 1-tick sides)", correct: true },
+                    { text: "∠KLJ ≅ ∠MJL (Given 1-arc angles)", correct: true },
+                    { text: "JL ≅ LJ (Reflexive Property — shared side)", correct: true },
+                    { text: "∠KJL ≅ ∠MLJ (Not marked)", correct: false }
+                ],
+                sufficient: false,
+                theorem: "None",
+                firstTri: "JKL",
+                secondTri: "",
+                vertexChoices: ["L", "M", "J"],
+                hint: "Look at ΔJKL: the two known sides are JK and JL (which meet at J), but the marked 1-arc angle is down at L (∠KLJ)! What pattern is Side-Side-Angle?",
+                explanation: "In ΔJKL, the known sides are JK and JL, which form angle ∠KJL. However, the given angle is ∠KLJ, which is NOT included between those two sides! That creates an SSA trap, so there is NOT enough information."
+            },
+            {
+                id: 13,
+                category: "bowtie",
+                badge: "Vertical Angles",
+                caption: "Intersecting segments AD and BC bisecting each other at E.",
+                diagram: buildTemplate("bowtie_horiz", ["E", "A", "B", "D", "C"], {
+                    ticks: [
+                        { from: "A", to: "E", count: 1 },
+                        { from: "D", to: "E", count: 1 },
+                        { from: "B", to: "E", count: 2 },
+                        { from: "C", to: "E", count: 2 }
+                    ]
+                }),
+                partAOptions: [
+                    { text: "AE ≅ DE (Given 1-tick sides)", correct: true },
+                    { text: "BE ≅ CE (Given 2-tick sides)", correct: true },
+                    { text: "∠AEB ≅ ∠DEC (Vertical Angles)", correct: true },
+                    { text: "AB ≅ DC (Not given)", correct: false }
+                ],
+                sufficient: true,
+                theorem: "SAS",
+                firstTri: "AEB",
+                secondTri: "DEC",
+                vertexChoices: ["D", "E", "C"],
+                hint: "Whenever two straight lines cross at E, the opposite angles ∠AEB and ∠DEC are Vertical Angles — right between the 1-tick and 2-tick sides!",
+                explanation: "We have AE ≅ DE (1 tick), vertical angles ∠AEB ≅ ∠DEC, and BE ≅ CE (2 ticks). Since the vertical angles are included between the two pairs of sides, ΔAEB ≅ ΔDEC by SAS."
+            },
+            {
+                id: 14,
+                category: "bowtie",
+                badge: "Vertical Angles",
+                caption: "Horizontal bowtie with outer sides FG ≅ JK and ∠F ≅ ∠J.",
+                diagram: buildTemplate("bowtie_horiz", ["H", "F", "G", "J", "K"], {
+                    ticks: [
+                        { from: "F", to: "G", count: 1 },
+                        { from: "J", to: "K", count: 1 }
+                    ],
+                    arcs: [
+                        { vertex: "F", ray1: "G", ray2: "H", count: 1 },
+                        { vertex: "J", ray1: "K", ray2: "H", count: 1 }
+                    ]
+                }),
+                partAOptions: [
+                    { text: "FG ≅ JK (Given 1-tick sides)", correct: true },
+                    { text: "∠F ≅ ∠J (Given 1-arc angles)", correct: true },
+                    { text: "∠FHG ≅ ∠JHK (Vertical Angles)", correct: true },
+                    { text: "FH ≅ JH (Not marked)", correct: false }
+                ],
+                sufficient: true,
+                theorem: "AAS",
+                firstTri: "FGH",
+                secondTri: "JKH",
+                vertexChoices: ["J", "K", "H"],
+                hint: "Don't forget the Vertical Angles at H! That gives you two angles (∠F and ∠FHG) and a non-included side (FG).",
+                explanation: "We have ∠F ≅ ∠J (given), ∠FHG ≅ ∠JHK (Vertical Angles), and non-included side FG ≅ JK (given). By AAS, ΔFGH ≅ ΔJKH."
+            },
+            {
+                id: 15,
+                category: "bowtie",
+                badge: "Vertical Angles Trap!",
+                caption: "Bowtie with two pairs of angles marked, but no tick marks on any sides.",
+                diagram: buildTemplate("bowtie_horiz", ["X", "T", "U", "V", "W"], {
+                    arcs: [
+                        { vertex: "T", ray1: "U", ray2: "X", count: 1 },
+                        { vertex: "V", ray1: "W", ray2: "X", count: 1 },
+                        { vertex: "U", ray1: "T", ray2: "X", count: 2 },
+                        { vertex: "W", ray1: "V", ray2: "X", count: 2 }
+                    ]
+                }),
+                partAOptions: [
+                    { text: "∠T ≅ ∠V (Given 1-arc angles)", correct: true },
+                    { text: "∠U ≅ ∠W (Given 2-arc angles)", correct: true },
+                    { text: "∠TXU ≅ ∠VXW (Vertical Angles)", correct: true },
+                    { text: "TX ≅ VX (No sides marked)", correct: false }
+                ],
+                sufficient: false,
+                theorem: "None",
+                firstTri: "TUX",
+                secondTri: "",
+                vertexChoices: ["V", "W", "X"],
+                hint: "We have all three pairs of angles congruent (including the vertical angles at X), but are ANY sides marked congruent?",
+                explanation: "Even with vertical angles ∠TXU ≅ ∠VXW, we only have three pairs of congruent angles (AAA) and zero congruent sides. AAA cannot prove triangles congruent!"
+            }
+        ];
+
+        const THEOREMS = ["SSS", "SAS", "ASA", "AAS", "HL", "None"];
+
+        let currentIndex = 0;
+        let currentFilter = "all";
+        let userState = {};
+
+        function initUserState() {
+            userState = {};
+            QUESTIONS.forEach(q => {
+                userState[q.id] = {
+                    partA: [],
+                    sufficient: null,
+                    theorem: null,
+                    secondTri: "",
+                    checked: false,
+                    isCorrect: false,
+                    partACorrect: false,
+                    partBCorrect: false,
+                    partCCorrect: false
+                };
+            });
+        }
+
+        function setFilter(filter) {
+            currentFilter = filter;
+            const filters = ["all", "quiz", "shared", "bowtie", "traps", "unanswered"];
+            filters.forEach(f => {
+                const btn = document.getElementById(`filter-${f}`);
+                if (!btn) return;
+                if (f === filter) {
+                    btn.className = "px-3 py-1 rounded-lg text-xs font-semibold bg-indigo-600 text-white transition";
+                } else {
+                    btn.className = "px-3 py-1 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition";
+                }
+            });
+
+            // Jump to the first question matching the selected filter
+            const matchingIdx = QUESTIONS.findIndex(q => matchesFilter(q));
+            if (matchingIdx !== -1) {
+                currentIndex = matchingIdx;
+            }
+            renderAll();
+        }
+
+        function matchesFilter(q) {
+            if (currentFilter === "all") return true;
+            if (currentFilter === "unanswered") return !userState[q.id].checked;
+            if (currentFilter === "traps") return q.category === "traps" || q.category === "detached";
+            return q.category === currentFilter;
+        }
+
+        function renderNavGrid() {
+            const navGrid = document.getElementById("question-nav-grid");
+            navGrid.innerHTML = QUESTIONS.map((q, idx) => {
+                if (!matchesFilter(q)) return "";
+                const st = userState[q.id];
+                const isCurrent = idx === currentIndex;
+
+                let btnStyle = "bg-slate-100 text-slate-700 border-slate-200 hover:bg-slate-200";
+                if (isCurrent) {
+                    btnStyle = "bg-indigo-600 text-white border-indigo-600 ring-2 ring-indigo-300";
+                } else if (st.checked && st.isCorrect) {
+                    btnStyle = "bg-emerald-500 text-white border-emerald-600";
+                } else if (st.checked && !st.isCorrect) {
+                    btnStyle = "bg-rose-500 text-white border-rose-600";
+                }
+
+                return `
+                    <button type="button" onclick="goToQuestion(${idx})" class="w-9 h-9 rounded-xl border font-bold text-xs flex-shrink-0 flex items-center justify-center transition ${btnStyle}">
+                        ${q.id}
+                    </button>
+                `;
+            }).join("");
+        }
+
+        function updateHeaderStats() {
+            let answeredCount = 0;
+            let scoreCount = 0;
+
+            QUESTIONS.forEach(q => {
+                const st = userState[q.id];
+                if (st.checked) {
+                    answeredCount++;
+                    if (st.isCorrect) scoreCount++;
+                }
+            });
+
+            document.getElementById("stat-answered").textContent = `${answeredCount}/15`;
+            document.getElementById("stat-score").textContent = `${scoreCount}`;
+            document.getElementById("stat-graded").textContent = `${answeredCount}`;
+        }
+
+        function renderCurrentQuestion() {
+            const q = QUESTIONS[currentIndex];
+            const st = userState[q.id];
+
+            // Header badges
+            document.getElementById("q-number-badge").textContent = `Question ${q.id} of 15`;
+            const catBadge = document.getElementById("q-category-badge");
+            catBadge.textContent = q.badge;
+            if (q.category === "quiz") {
+                catBadge.className = "px-2.5 py-0.5 rounded-full text-xs font-semibold bg-amber-100 text-amber-800 border border-amber-200";
+            } else if (q.category === "shared") {
+                catBadge.className = "px-2.5 py-0.5 rounded-full text-xs font-semibold bg-indigo-50 text-indigo-700 border border-indigo-200";
+            } else if (q.category === "bowtie") {
+                catBadge.className = "px-2.5 py-0.5 rounded-full text-xs font-semibold bg-purple-50 text-purple-700 border border-purple-200";
+            } else {
+                catBadge.className = "px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200";
+            }
+
+            // Render SVG diagram
+            document.getElementById("svg-diagram-container").innerHTML = GeometryRenderer.renderDiagram(q.diagram);
+            document.getElementById("diagram-caption").textContent = q.caption;
+
+            // Reset hint box unless opened
+            document.getElementById("hint-box").classList.add("hidden");
+            document.getElementById("hint-text").textContent = q.hint;
+
+            // Render Part A Options
+            const partAContainer = document.getElementById("part-a-options");
+            partAContainer.innerHTML = q.partAOptions.map((opt, oIdx) => {
+                const isSelected = st.partA.includes(oIdx);
+                let cardStyle = "border-slate-200 bg-slate-50/70 hover:border-indigo-300 text-slate-800";
+                if (isSelected) {
+                    cardStyle = "border-indigo-600 bg-indigo-50/70 text-indigo-950 font-semibold ring-1 ring-indigo-600";
+                }
+                if (st.checked) {
+                    if (opt.correct && isSelected) {
+                        cardStyle = "border-emerald-500 bg-emerald-50 text-emerald-950 font-semibold";
+                    } else if (opt.correct && !isSelected) {
+                        cardStyle = "border-amber-400 bg-amber-50 text-amber-900 font-semibold";
+                    } else if (!opt.correct && isSelected) {
+                        cardStyle = "border-rose-400 bg-rose-50 text-rose-900 line-through";
+                    }
+                }
+
+                return `
+                    <button type="button" onclick="togglePartAOption(${oIdx})" class="p-3 rounded-xl border-2 text-left text-xs sm:text-sm flex items-start gap-2.5 transition ${cardStyle}">
+                        <span class="w-5 h-5 rounded-md border flex-shrink-0 flex items-center justify-center mt-0.5 ${isSelected ? 'bg-indigo-600 border-indigo-600 text-white' : 'bg-white border-slate-300'}">
+                            ${isSelected ? '&#10003;' : ''}
+                        </span>
+                        <span class="math-font leading-snug">${opt.text}</span>
+                    </button>
+                `;
+            }).join("");
+
+            // Render Part B Buttons
+            const btnYes = document.getElementById("btn-suff-yes");
+            const btnNo = document.getElementById("btn-suff-no");
+            btnYes.className = "py-3 px-4 rounded-xl border-2 font-bold text-sm sm:text-base flex items-center justify-center gap-2 transition " +
+                (st.sufficient === true
+                    ? "border-indigo-600 bg-indigo-50 text-indigo-900 ring-1 ring-indigo-600"
+                    : "border-slate-200 bg-white text-slate-700 hover:border-indigo-300");
+            btnNo.className = "py-3 px-4 rounded-xl border-2 font-bold text-sm sm:text-base flex items-center justify-center gap-2 transition " +
+                (st.sufficient === false
+                    ? "border-indigo-600 bg-indigo-50 text-indigo-900 ring-1 ring-indigo-600"
+                    : "border-slate-200 bg-white text-slate-700 hover:border-indigo-300");
+
+            // Render Part C Theorem Buttons
+            const thmContainer = document.getElementById("theorem-buttons");
+            thmContainer.innerHTML = THEOREMS.map(thm => {
+                const isSelected = st.theorem === thm;
+                const label = thm === "None" ? "None / N/A" : thm;
+                const cls = isSelected
+                    ? "border-indigo-600 bg-indigo-600 text-white shadow-xs"
+                    : "border-slate-200 bg-slate-50 text-slate-800 hover:border-indigo-300 hover:bg-white";
+                return `
+                    <button type="button" onclick="selectTheorem('${thm}')" class="py-2.5 px-3 rounded-xl border-2 font-bold text-xs sm:text-sm transition ${cls}">
+                        ${label}
+                    </button>
+                `;
+            }).join("");
+
+            // Render Part C Congruence Statement
+            document.getElementById("first-triangle-label").innerHTML = `&Delta;${q.firstTri}`;
+            const stmtInput = document.getElementById("input-second-triangle");
+            stmtInput.value = st.secondTri;
+
+            const notCongNote = document.getElementById("not-congruent-note");
+            if (st.sufficient === false || st.theorem === "None") {
+                stmtInput.disabled = true;
+                stmtInput.placeholder = "N/A";
+                stmtInput.className = "w-24 text-center text-lg sm:text-xl font-bold math-font uppercase tracking-widest py-1.5 px-3 rounded-lg border-2 border-slate-200 bg-slate-100 text-slate-400";
+                notCongNote.classList.remove("hidden");
+            } else {
+                stmtInput.disabled = false;
+                stmtInput.placeholder = "???";
+                stmtInput.className = "w-24 text-center text-lg sm:text-xl font-bold math-font uppercase tracking-widest py-1.5 px-3 rounded-lg border-2 border-indigo-300 focus:border-indigo-600 focus:outline-none bg-white text-slate-900 shadow-inner";
+                notCongNote.classList.add("hidden");
+            }
+
+            // Vertex tap buttons
+            const tapContainer = document.getElementById("vertex-tap-buttons");
+            tapContainer.innerHTML = q.vertexChoices.map(v => `
+                <button type="button" onclick="tapVertex('${v}')" class="w-8 h-8 rounded-lg font-bold math-font text-sm bg-white border border-slate-300 text-slate-800 hover:bg-indigo-50 hover:border-indigo-400 transition shadow-2xs">
+                    ${v}
+                </button>
+            `).join("");
+
+            // Status Badges & Feedback Box
+            const statusA = document.getElementById("part-a-status");
+            const statusB = document.getElementById("part-b-status");
+            const statusC = document.getElementById("part-c-status");
+            const feedbackBox = document.getElementById("feedback-box");
+
+            if (st.checked) {
+                statusA.innerHTML = st.partACorrect
+                    ? `<span class="text-emerald-600">&#10003; Correct</span>`
+                    : `<span class="text-rose-600">&#10007; Check parts</span>`;
+                statusB.innerHTML = st.partBCorrect
+                    ? `<span class="text-emerald-600">&#10003; Correct</span>`
+                    : `<span class="text-rose-600">&#10007; Incorrect</span>`;
+                statusC.innerHTML = st.partCCorrect
+                    ? `<span class="text-emerald-600">&#10003; Correct</span>`
+                    : `<span class="text-rose-600">&#10007; Check order/theorem</span>`;
+
+                feedbackBox.classList.remove("hidden");
+                const correctPartsList = q.partAOptions.filter(o => o.correct).map(o => o.text.split(" (")[0]).join(", ");
+                const finalStatement = q.sufficient
+                    ? `${q.theorem}; &Delta;${q.firstTri} &cong; &Delta;${q.secondTri}`
+                    : `Not Enough Information (Cannot prove congruent)`;
+
+                if (st.isCorrect) {
+                    feedbackBox.className = "rounded-2xl border-2 border-emerald-400 bg-emerald-50/90 p-5 shadow-sm";
+                    feedbackBox.innerHTML = `
+                        <div class="flex items-center gap-2 text-emerald-800 font-extrabold text-base mb-2">
+                            <span class="w-6 h-6 rounded-full bg-emerald-600 text-white flex items-center justify-center text-xs">&#10003;</span>
+                            <span>Awesome job, Aiden! All 3 parts (a, b, and c) are 100% correct!</span>
+                        </div>
+                        <div class="text-xs sm:text-sm text-emerald-950 space-y-1.5">
+                            <div><strong>a) Congruent Parts:</strong> <span class="math-font">${correctPartsList}</span></div>
+                            <div><strong>b) Sufficient Info:</strong> ${q.sufficient ? "Yes" : "No"}</div>
+                            <div><strong>c) Justification &amp; Statement:</strong> <span class="math-font font-bold">${finalStatement}</span></div>
+                            <p class="pt-1 text-emerald-800">${q.explanation}</p>
+                        </div>
+                    `;
+                } else {
+                    feedbackBox.className = "rounded-2xl border-2 border-rose-300 bg-rose-50/90 p-5 shadow-sm";
+                    feedbackBox.innerHTML = `
+                        <div class="flex items-center gap-2 text-rose-800 font-extrabold text-base mb-2">
+                            <span class="w-6 h-6 rounded-full bg-rose-600 text-white flex items-center justify-center text-xs">!</span>
+                            <span>Let's Review the Solution for Question #${q.id}:</span>
+                        </div>
+                        <div class="text-xs sm:text-sm text-rose-950 space-y-1.5">
+                            <div><strong>a) Correct Congruent Parts:</strong> <span class="math-font">${correctPartsList}</span></div>
+                            <div><strong>b) Sufficient Info:</strong> <strong>${q.sufficient ? "Yes" : "No"}</strong></div>
+                            <div><strong>c) Correct Justification &amp; Statement:</strong> <span class="math-font font-bold">${finalStatement}</span></div>
+                            <p class="pt-1 text-slate-700 bg-white/80 p-3 rounded-xl border border-rose-200 mt-2">${q.explanation}</p>
+                        </div>
+                    `;
+                }
+            } else {
+                statusA.innerHTML = "";
+                statusB.innerHTML = "";
+                statusC.innerHTML = "";
+                feedbackBox.classList.add("hidden");
+            }
+
+            // Prev / Next button states
+            document.getElementById("btn-prev").disabled = currentIndex === 0;
+            document.getElementById("btn-prev").style.opacity = currentIndex === 0 ? "0.4" : "1";
+            document.getElementById("btn-next").disabled = currentIndex === QUESTIONS.length - 1;
+            document.getElementById("btn-next").style.opacity = currentIndex === QUESTIONS.length - 1 ? "0.4" : "1";
+        }
+
+        function renderAll() {
+            renderNavGrid();
+            updateHeaderStats();
+            renderCurrentQuestion();
+        }
+
+        function togglePartAOption(optIndex) {
+            const q = QUESTIONS[currentIndex];
+            const st = userState[q.id];
+            const pos = st.partA.indexOf(optIndex);
+            if (pos >= 0) {
+                st.partA.splice(pos, 1);
+            } else {
+                st.partA.push(optIndex);
+            }
+            st.checked = false;
+            renderCurrentQuestion();
+        }
+
+        function selectSufficient(val) {
+            const q = QUESTIONS[currentIndex];
+            const st = userState[q.id];
+            st.sufficient = val;
+            if (val === false) {
+                st.theorem = "None";
+                st.secondTri = "";
+            } else if (st.theorem === "None") {
+                st.theorem = null;
+            }
+            st.checked = false;
+            renderCurrentQuestion();
+        }
+
+        function selectTheorem(thm) {
+            const q = QUESTIONS[currentIndex];
+            const st = userState[q.id];
+            st.theorem = thm;
+            if (thm === "None") {
+                st.sufficient = false;
+                st.secondTri = "";
+            } else if (st.sufficient === null || st.sufficient === false) {
+                st.sufficient = true;
+            }
+            st.checked = false;
+            renderCurrentQuestion();
+        }
+
+        function handleStatementInput(val) {
+            const q = QUESTIONS[currentIndex];
+            const st = userState[q.id];
+            st.secondTri = val.toUpperCase().replace(/[^A-Z]/g, "").slice(0, 3);
+            st.checked = false;
+        }
+
+        function tapVertex(letter) {
+            const q = QUESTIONS[currentIndex];
+            const st = userState[q.id];
+            if (st.sufficient === false || st.theorem === "None") return;
+            if (st.secondTri.length < 3 && !st.secondTri.includes(letter)) {
+                st.secondTri += letter;
+                st.checked = false;
+                renderCurrentQuestion();
+            }
+        }
+
+        function clearStatementInput() {
+            const q = QUESTIONS[currentIndex];
+            const st = userState[q.id];
+            st.secondTri = "";
+            st.checked = false;
+            renderCurrentQuestion();
+        }
+
+        function checkCurrentQuestion() {
+            const q = QUESTIONS[currentIndex];
+            const st = userState[q.id];
+
+            // Grade Part A: Must select all correct options and no incorrect options
+            const correctIndices = q.partAOptions
+                .map((o, i) => (o.correct ? i : -1))
+                .filter(i => i !== -1);
+            const selectedSorted = [...st.partA].sort((a, b) => a - b);
+            st.partACorrect =
+                correctIndices.length === selectedSorted.length &&
+                correctIndices.every((val, idx) => val === selectedSorted[idx]);
+
+            // Grade Part B
+            st.partBCorrect = st.sufficient === q.sufficient;
+
+            // Grade Part C
+            if (!q.sufficient) {
+                st.partCCorrect = st.sufficient === false && (st.theorem === "None" || st.theorem === null);
+            } else {
+                const cleanTri = (st.secondTri || "").trim().toUpperCase();
+                st.partCCorrect = st.theorem === q.theorem && cleanTri === q.secondTri.toUpperCase();
+            }
+
+            st.isCorrect = st.partACorrect && st.partBCorrect && st.partCCorrect;
+            st.checked = true;
+
+            renderAll();
+        }
+
+        function goToQuestion(idx) {
+            currentIndex = idx;
+            renderAll();
+        }
+
+        function prevQuestion() {
+            if (currentIndex > 0) {
+                currentIndex--;
+                renderAll();
+            }
+        }
+
+        function nextQuestion() {
+            if (currentIndex < QUESTIONS.length - 1) {
+                currentIndex++;
+                renderAll();
+            }
+        }
+
+        function toggleHint() {
+            const box = document.getElementById("hint-box");
+            box.classList.toggle("hidden");
+        }
+
+        function toggleCheatSheet() {
+            const drawer = document.getElementById("cheat-sheet-drawer");
+            drawer.classList.toggle("hidden");
+        }
+
+        function togglePrintView() {
+            const interactiveView = document.getElementById("interactive-view");
+            const worksheetView = document.getElementById("worksheet-view");
+            const label = document.getElementById("view-mode-label");
+
+            if (worksheetView.classList.contains("hidden")) {
+                interactiveView.classList.add("hidden");
+                worksheetView.classList.remove("hidden");
+                label.textContent = "Interactive Test";
+                renderWorksheetView();
+            } else {
+                worksheetView.classList.add("hidden");
+                interactiveView.classList.remove("hidden");
+                label.textContent = "Worksheet View";
+            }
+        }
+
+        function renderWorksheetView() {
+            const showAnswers = document.getElementById("toggle-print-answers").checked;
+            const container = document.getElementById("worksheet-questions-container");
+
+            container.innerHTML = QUESTIONS.map(q => {
+                const svgMarkup = GeometryRenderer.renderDiagram(q.diagram);
+                const correctParts = q.partAOptions
+                    .filter(o => o.correct)
+                    .map(o => `<li class="math-font">${o.text.split(" (")[0]}</li>`)
+                    .join("");
+                const partBText = q.sufficient ? "Yes (Sufficient Information)" : "No (Insufficient Information)";
+                const partCText = q.sufficient
+                    ? `${q.theorem}; &Delta;${q.firstTri} &cong; &Delta;${q.secondTri}`
+                    : "Not Congruent / Insufficient Info";
+
+                return `
+                    <div class="print-card grid grid-cols-1 md:grid-cols-12 gap-6 items-center pt-2">
+                        <div class="md:col-span-6 flex items-start gap-3">
+                            <span class="font-serif font-bold text-base mt-1">${q.id})</span>
+                            <div class="w-full max-w-[340px] aspect-[4/3] border border-slate-200 rounded-xl p-2 bg-white">
+                                ${svgMarkup}
+                            </div>
+                        </div>
+                        <div class="md:col-span-6 font-serif text-sm space-y-4">
+                            <div class="flex items-start gap-2">
+                                <span class="font-bold">a)</span>
+                                ${showAnswers
+                                    ? `<ul class="list-disc list-inside text-indigo-900 font-semibold space-y-0.5">${correctParts}</ul>`
+                                    : `<div class="flex-1 space-y-3 pt-1">
+                                        <div class="border-b border-slate-400 h-4"></div>
+                                        <div class="border-b border-slate-400 h-4"></div>
+                                        <div class="border-b border-slate-400 h-4"></div>
+                                       </div>`
+                                }
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="font-bold">b)</span>
+                                ${showAnswers
+                                    ? `<span class="text-emerald-800 font-bold">${partBText}</span>`
+                                    : `<div class="border-b border-slate-400 flex-1 h-5"></div>`
+                                }
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="font-bold">c)</span>
+                                ${showAnswers
+                                    ? `<span class="text-indigo-900 font-bold math-font text-base">${partCText}</span>`
+                                    : `<div class="flex items-center gap-2 flex-1">
+                                        <span>Theorem: ____________</span>
+                                        <span class="math-font">&Delta;${q.firstTri} &cong; &Delta;_________</span>
+                                       </div>`
+                                }
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join("");
+        }
+
+        function openResetModal() {
+            document.getElementById("reset-modal").classList.remove("hidden");
+        }
+
+        function closeResetModal() {
+            document.getElementById("reset-modal").classList.add("hidden");
+        }
+
+        function confirmResetAll() {
+            initUserState();
+            currentIndex = 0;
+            closeResetModal();
+            renderAll();
+        }
+
+        // Initialize app on load
+        window.onload = function () {
+            initUserState();
+            renderAll();
+        };
+    </script>
+</body>
+</html>
